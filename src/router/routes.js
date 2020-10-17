@@ -18,4 +18,9 @@ export default [
     name: "Classes",
     component: () => import("./views/MainScreen.vue"),
   },
+  {
+    path: "/people",
+    name: "People",
+    component: () => import("./views/People.vue"),
+  },
 ];
