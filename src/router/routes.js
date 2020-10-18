@@ -18,4 +18,19 @@ export default [
     name: "Classes",
     component: () => import("./views/MainScreen.vue"),
   },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("./views/LoginScreen.vue"),
+  },
+  {
+    path: "/classes/settings",
+    name: "Settings Class",
+    component: () => import("./views/SettingsClassScreen.vue"),
+  },
+  {
+    path: "/people",
+    name: "People",
+    component: () => import("./views/People.vue"),
+  },
 ];

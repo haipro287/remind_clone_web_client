@@ -80,9 +80,9 @@
         <v-tabs align-with-title>
           <v-tab>Message</v-tab>
           <v-tab>File</v-tab>
-          <v-tab>People</v-tab>
+          <v-tab to="/people">People</v-tab>
           <v-tab>Information</v-tab>
-          <v-tab>Setting</v-tab>
+          <v-tab to="/classes/settings">Setting</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
