@@ -1,7 +1,7 @@
 <template>
   <base-line class="background">
     <div class="container">
-      <img src="..\..\assets\login.jpg" class="loginImg" />
+      <img src="/assets/login.jpg" class="loginImg" />
       <div class="formContainer">
         <h1 class="titleSignin">Sign In</h1>
         <v-form @submit="stop">
