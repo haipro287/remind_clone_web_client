@@ -28,4 +28,9 @@ export default [
     name: "Settings Class",
     component: () => import("./views/SettingsClassScreen.vue"),
   },
+  {
+    path: "/people",
+    name: "People",
+    component: () => import("./views/People.vue"),
+  },
 ];
