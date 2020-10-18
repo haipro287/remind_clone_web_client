@@ -19,7 +19,7 @@ export default [
     component: () => import("./views/MainScreen.vue"),
   },
   {
-    path: "/people",
+    path: "/classes/people",
     name: "People",
     component: () => import("./views/People.vue"),
   },
