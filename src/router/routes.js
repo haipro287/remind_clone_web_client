@@ -33,4 +33,9 @@ export default [
     name: "People",
     component: () => import("./views/People.vue"),
   },
+  {
+    path: "/settings/profile",
+    name: "Settings Profile",
+    component: () => import("./views/SettingsProfileScreen.vue"),
+  },
 ];
