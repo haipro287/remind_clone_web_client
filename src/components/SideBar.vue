@@ -10,21 +10,21 @@
           <v-list-item-content>
             <v-list-item-title>
               <div>
-                <v-menu
-                  top
-                  :close-on-click="true"
-                  max-height="50%"
-                  max-width="50%"
-                >
+                <v-menu offset-y>
                   <template v-slot:activator="{ on, attrs }">
-                    <a href="#" v-bind="attrs" v-on="on">
-                      Patida
-                    </a>
+                    <v-list-item two-line>
+                      <v-list-item-content>
+                        <v-list-item-subtitle>Hello,</v-list-item-subtitle>
+                        <v-list-item-title v-bind="attrs" v-on="on">
+                          Pham Thi Dan
+                        </v-list-item-title>
+                      </v-list-item-content>
+                    </v-list-item>
                   </template>
 
-                  <v-list>
+                  <v-list dense>
                     <v-list-item v-for="item in items" :key="item.title">
-                      <v-list-item-icon>
+                      <v-list-item-icon style="margin-right: 12px">
                         <v-icon>{{ item.icon }}</v-icon>
                       </v-list-item-icon>
 
@@ -41,12 +41,13 @@
       </template>
 
       <v-divider></v-divider>
+      <br />
 
-      <v-list dense>
+      <v-list dense class="listClass">
         <strong class="group">Classes Owned</strong><br />
 
         <v-list-item v-for="item in classes_owned" :key="item.title">
-          <v-list-item-icon>
+          <v-list-item-icon style="margin-right: 12px">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
@@ -59,7 +60,7 @@
 
         <strong class="group">Classes Joined</strong>
         <v-list-item v-for="item in classes_joined" :key="item.title">
-          <v-list-item-icon>
+          <v-list-item-icon style="margin-right: 12px">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
@@ -70,21 +71,27 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar class="navbar" height="50%">
-      <v-avatar color="indigo">
+      <v-avatar color="info">
         <v-icon dark>
           mdi-account-circle
         </v-icon>
       </v-avatar>
-      <v-toolbar-title> Class 1</v-toolbar-title>
+      <v-list-item two-line>
+        <v-list-item-content>
+          <v-list-item-title class="className">Class 1</v-list-item-title>
+          <v-list-item-subtitle>@1ve423d</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
       <template v-slot:extension>
         <v-tabs align-with-title>
           <v-tab>Message</v-tab>
           <v-tab>File</v-tab>
-          <v-tab to="/people">People</v-tab>
+          <v-tab to="/classes/people">People</v-tab>
           <v-tab>Information</v-tab>
           <v-tab to="/classes/settings">Setting</v-tab>
         </v-tabs>
       </template>
+      <v-btn right color="info">Add people</v-btn>
     </v-app-bar>
   </v-card>
 </template>
@@ -113,12 +120,12 @@ export default {
         { title: "Log out", icon: "mdi-logout-variant" },
       ],
       classes_owned: [
-        { title: "Create a class", icon: "mdi-plus-circle" },
+        { title: "Create a class", icon: "mdi-plus-circle-outline" },
         { title: "Class 1", icon: "mdi-google-classroom" },
         { title: "Class 2", icon: "mdi-google-classroom" },
       ],
       classes_joined: [
-        { title: "Join a class", icon: "mdi-plus-circle" },
+        { title: "Join a class", icon: "mdi-plus-circle-outline" },
         { title: "Class 1", icon: "mdi-google-classroom" },
         { title: "Class 2", icon: "mdi-google-classroom" },
       ],
@@ -132,21 +139,23 @@ export default {
   background-color: #f2f3f5;
 }
 
-.group {
-  margin-left: 5%;
-}
-
-.group create {
+.listClass {
   margin-left: 10%;
 }
 
-a {
-  text-decoration: none;
+.group {
+  margin-left: 5%;
+  font-weight: 500;
+}
+
+.className {
+  font-size: larger;
+  font-weight: 500;
 }
 
 .navbar {
   margin-left: 250px;
   height: 50%;
-  color: "#f2f3f5";
+  background-color: white !important;
 }
 </style>
