@@ -9,13 +9,13 @@
         </v-avatar>
         <v-btn @click="changeAvatar"> Change avatar </v-btn>
         <v-row>
-          <v-col cols="1" sm="6">
+          <v-col sm="6">
             <h5>Class name</h5>
             <v-text-field v-model="classname" outlined> </v-text-field>
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="1" sm="6">
+          <v-col sm="6">
             <h5> Class code </h5>
             <v-text-field v-model="classcode" outlined> </v-text-field>
           </v-col>

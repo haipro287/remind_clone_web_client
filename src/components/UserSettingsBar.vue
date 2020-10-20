@@ -5,6 +5,7 @@
       dark
       src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
       width="100%"
+      left
       permanent
     >
       <v-list>
@@ -56,5 +57,6 @@ export default {
 .settingSide {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
+  float: left;
 }
 </style>
