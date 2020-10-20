@@ -38,4 +38,9 @@ export default [
     name: "Settings Profile",
     component: () => import("./views/SettingsProfileScreen.vue"),
   },
+  {
+    path: "/settings/notification",
+    name: "Settings Notification",
+    component: () => import("./views/SettingsNotificationScreen.vue"),
+  },
 ];
