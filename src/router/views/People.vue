@@ -1,48 +1,27 @@
 <template>
   <classline>
     <v-container style="margin-left: 300px">
-      <v-row>
-        <v-btn @click="expand = !expand">
-          <v-icon left>
-            mdi-account-search-outline
-          </v-icon>
-          Search
-        </v-btn>
-        <v-expand-transition>
-          <v-card
-            v-show="expand"
-            height="100"
-            width="100"
-            class="mx-auto secondary"
-          ></v-card>
-        </v-expand-transition>
+      <v-card>
+        <v-card-title>
+          <v-text-field
+            v-model="search"
+            append-icon="mdi-magnify"
+            label="Search"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-title>
 
-        <div class="mx-4 hidden-sm-and-down"></div>
-
-        <v-btn class="tab-people-everyone">
-          <v-icon left>
-            mdi-account-group-outline
-          </v-icon>
-          Everyone(8)
-          <v-icon right>
-            mdi-filter-variant
-          </v-icon>
-        </v-btn>
-      </v-row>
-
-      <br />
-      <v-layout column>
         <v-data-table
           v-model="selected"
           :headers="headers"
           :items="desserts"
+          :search="search"
           item-key="name"
           show-select
           calculate-widths
-        >
-          <template v-slot:top> </template>
-        </v-data-table>
-      </v-layout>
+        ></v-data-table>
+      </v-card>
     </v-container>
   </classline>
 </template>
@@ -55,6 +34,7 @@ export default {
   data() {
     return {
       expand: false,
+      search: "",
       selected: [],
       headers: [
         { text: "Name", value: "name" },
