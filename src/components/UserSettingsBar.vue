@@ -17,13 +17,18 @@
             <v-list-item-title><h3>BACK</h3></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item v-for="([icon, text], i) in items" :key="i" link>
+        <v-list-item
+          v-for="(item, i) in items"
+          :key="i"
+          link
+          @click="$router.push({ path: item.link })"
+        >
           <v-list-item-icon>
-            <v-icon>{{ icon }}</v-icon>
+            <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ text }}</v-list-item-title>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -36,13 +41,41 @@ export default {
   data() {
     return {
       items: [
-        ["mdi-account", "Profile"],
-        ["mdi-bell", "Notification"],
-        ["mdi-airballoon", "App Integrations"],
-        ["mdi-coffee", "Widgets"],
-        ["mdi-comment", "Message History"],
-        ["mdi-content-save", "Archived classes"],
-        ["mdi-account-alert", "Block users"],
+        {
+          icon: "mdi-account",
+          text: "Profile",
+          link: "/settings/profile",
+        },
+        {
+          icon: "mdi-bell",
+          text: "Notification",
+          link: "/settings/notification",
+        },
+        {
+          icon: "mdi-airballoon",
+          text: "App Integrations",
+          link: "",
+        },
+        {
+          icon: "mdi-coffee",
+          text: "Widgets",
+          link: "",
+        },
+        {
+          icon: "mdi-comment",
+          text: "Message History",
+          link: "/settings/message",
+        },
+        {
+          icon: "mdi-content-save",
+          text: "Archived classes",
+          link: "/settings/archived",
+        },
+        {
+          icon: "mdi-account-alert",
+          text: "Block users",
+          link: "/settings/block",
+        },
       ],
     };
   },

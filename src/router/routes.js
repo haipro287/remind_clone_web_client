@@ -43,4 +43,9 @@ export default [
     name: "Settings Notification",
     component: () => import("./views/SettingsNotificationScreen.vue"),
   },
+  {
+    path: "/settings/message",
+    name: "Settings Message",
+    component: () => import("./views/SettingsMessageScreen.vue"),
+  },
 ];
