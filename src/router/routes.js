@@ -33,4 +33,24 @@ export default [
     name: "People",
     component: () => import("./views/People.vue"),
   },
+  {
+    path: "/settings/profile",
+    name: "Settings Profile",
+    component: () => import("./views/SettingsProfileScreen.vue"),
+  },
+  {
+    path: "/settings/notification",
+    name: "Settings Notification",
+    component: () => import("./views/SettingsNotificationScreen.vue"),
+  },
+  {
+    path: "/settings/message",
+    name: "Settings Message",
+    component: () => import("./views/SettingsMessageScreen.vue"),
+  },
+  {
+    path: "/comingSoon",
+    name: "Coming soon",
+    component: () => import("./views/comingSoon.vue"),
+  },
 ];
