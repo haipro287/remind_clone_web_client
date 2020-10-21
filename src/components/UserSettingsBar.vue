@@ -54,12 +54,12 @@ export default {
         {
           icon: "mdi-airballoon",
           text: "App Integrations",
-          link: "",
+          link: "/comingSoon",
         },
         {
           icon: "mdi-coffee",
           text: "Widgets",
-          link: "",
+          link: "/comingSoon",
         },
         {
           icon: "mdi-comment",
@@ -69,12 +69,12 @@ export default {
         {
           icon: "mdi-content-save",
           text: "Archived classes",
-          link: "/settings/archived",
+          link: "/comingSoon",
         },
         {
           icon: "mdi-account-alert",
           text: "Block users",
-          link: "/settings/block",
+          link: "/comingSoon",
         },
       ],
     };

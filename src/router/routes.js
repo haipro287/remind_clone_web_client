@@ -48,4 +48,9 @@ export default [
     name: "Settings Message",
     component: () => import("./views/SettingsMessageScreen.vue"),
   },
+  {
+    path: "/comingSoon",
+    name: "Coming soon",
+    component: () => import("./views/comingSoon.vue"),
+  },
 ];
