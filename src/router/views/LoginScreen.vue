@@ -4,9 +4,9 @@
       <img src="/assets/login.jpg" class="loginImg" />
       <div class="formContainer">
         <h1 class="titleSignin">Sign In</h1>
-        <v-form @submit="stop">
+        <v-form @submit="login()">
           <v-text-field
-            v-model="username"
+            v-model="user.email"
             label="Email address or phone number"
             placeholder="Required"
             outlined
@@ -14,7 +14,7 @@
           >
           </v-text-field>
           <v-text-field
-            v-model="password"
+            v-model="user.password"
             label="Password"
             placeholder="Required"
             outlined
@@ -23,7 +23,7 @@
           </v-text-field>
           <v-checkbox v-model="keepsignin" :label="`Stay logged in`">
           </v-checkbox>
-          <v-btn block elevation="4" color="primary">
+          <v-btn block elevation="4" color="primary" @click="login()">
             Log in
           </v-btn>
           <p class="orDivider"> OR </p>
@@ -41,11 +41,26 @@
 
 <script>
 import BaseLine from "../layouts/Baseline.vue";
+import { AUTH_LOGIN } from "../../store/actions/auth";
 
 export default {
   name: "LogIn",
   components: {
     BaseLine,
+  },
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+      keepsignin: false,
+    };
+  },
+  methods: {
+    login() {
+      this.$store.dispatch(AUTH_LOGIN, this.user);
+    },
   },
 };
 </script>
