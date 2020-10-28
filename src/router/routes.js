@@ -2,21 +2,20 @@ export default [
   {
     path: "/",
     name: "Home",
-    component: require("./views/Home.vue").default,
+    component: () => import("./views/Home.vue"),
   },
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "./views/About.vue"),
+    component: () => import("./views/About.vue"),
   },
   {
     path: "/classes",
     name: "Classes",
     component: () => import("./views/MainScreen.vue"),
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/login",
@@ -49,7 +48,7 @@ export default [
     component: () => import("./views/SettingsMessageScreen.vue"),
   },
   {
-    path: "/comingSoon",
+    path: "*",
     name: "Coming soon",
     component: () => import("./views/comingSoon.vue"),
   },

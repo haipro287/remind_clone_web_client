@@ -8,7 +8,7 @@
           <v-text-field
             v-model="user.email"
             label="Email address or phone number"
-            placeholder="Required"
+            placeholder="user@remind-clone.com"
             outlined
             required
           >
@@ -16,9 +16,12 @@
           <v-text-field
             v-model="user.password"
             label="Password"
-            placeholder="Required"
             outlined
             required
+            placeholder="password"
+            :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPassword ? 'text' : 'password'"
+            @click:append="showPassword = !showPassword"
           >
           </v-text-field>
           <v-checkbox v-model="keepsignin" :label="`Stay logged in`">
@@ -55,11 +58,17 @@ export default {
         password: "",
       },
       keepsignin: false,
+      showPassword: false,
     };
   },
   methods: {
     login() {
-      this.$store.dispatch(AUTH_LOGIN, this.user);
+      this.$store.dispatch(AUTH_LOGIN, this.user).then(() => {
+        if (this.$route.query.redirect) {
+          this.$router.push(this.$route.query.redirect);
+        }
+        this.$router.push({ name: "Classes" });
+      });
     },
   },
 };

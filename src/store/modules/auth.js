@@ -13,12 +13,8 @@ const state = {
 };
 
 const getters = {
-  isAuthenticated: state => {
-    !!state.token;
-  },
-  authStatus: state => {
-    state.status;
-  },
+  isAuthenticated: state => !!state.token,
+  authStatus: state => state.status,
 };
 
 const actions = {
@@ -29,6 +25,7 @@ const actions = {
         .post("/api/user/auth/login", user)
         .then(res => {
           commit(AUTH_SUCCESS, res.data);
+          localStorage.setItem("token", res.data.data.token);
           resolve(res);
         })
         .catch(err => {
@@ -39,7 +36,13 @@ const actions = {
   },
   [AUTH_SUCCESS]: () => {},
   [AUTH_ERROR]: () => {},
-  [AUTH_LOGOUT]: () => {},
+  [AUTH_LOGOUT]: ({ commit }) => {
+    return new Promise(resolve => {
+      commit(AUTH_LOGOUT);
+      localStorage.removeItem("token");
+      resolve();
+    });
+  },
 };
 
 const mutations = {
