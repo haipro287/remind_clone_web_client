@@ -1,36 +1,56 @@
+import About from "./views/About.vue";
+import Login from "./views/LoginScreen.vue";
+import Classes from "./views/MainScreen.vue";
+import People from "./views/People.vue";
+import Setting_Class from "./views/SettingsClassScreen.vue";
+
 export default [
   {
     path: "/",
-    name: "Home",
-    component: require("./views/Home.vue").default,
+    alias: ["/message"],
+    name: "Login",
+    component: Login,
   },
   {
     path: "/about",
     name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "./views/About.vue"),
+    component: About,
   },
   {
     path: "/classes",
+    redirect: "/classes/0",
+  },
+  {
+    path: "/classes/:code",
     name: "Classes",
-    component: () => import("./views/MainScreen.vue"),
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("./views/LoginScreen.vue"),
-  },
-  {
-    path: "/classes/settings",
-    name: "Settings Class",
-    component: () => import("./views/SettingsClassScreen.vue"),
-  },
-  {
-    path: "/classes/people",
-    name: "People",
-    component: () => import("./views/People.vue"),
+    component: Classes,
+    children: [
+      {
+        path: "message",
+        alias: [""],
+        name: "Message",
+        component: Setting_Class, //thay bang Message
+      },
+      {
+        path: "files",
+        name: "Files",
+        component: People, //thay bang Files
+      },
+      {
+        path: "people",
+        name: "People",
+        component: People,
+      },
+      {
+        path: "information",
+        name: "Information",
+        component: Setting_Class, //thay bang Information
+      },
+      {
+        path: "settings",
+        name: "Settings Class",
+        component: Setting_Class,
+      },
+    ],
   },
 ];

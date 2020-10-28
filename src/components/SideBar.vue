@@ -26,15 +26,23 @@
                   </template>
 
                   <v-list dense>
-                    <v-list-item v-for="item in items" :key="item.title">
-                      <v-list-item-icon style="margin-right: 12px">
-                        <v-icon>{{ item.icon }}</v-icon>
-                      </v-list-item-icon>
+                    <v-list-item-group v-model="selectedOption" color="primary">
+                      <v-list-item
+                        v-for="item in items"
+                        :key="item.title"
+                        :href="'/classes'"
+                      >
+                        <v-list-item-icon style="margin-right: 12px">
+                          <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
 
-                      <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{
+                            item.title
+                          }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list-item-group>
                   </v-list>
                 </v-menu>
               </div>
@@ -43,7 +51,7 @@
         </v-list-item>
       </template>
 
-      <v-divider style="margin-top: 7px"></v-divider>
+      <v-divider style="margin-top: 6px"></v-divider>
 
       <v-list class="listClass">
         <v-list-item-group v-model="selectedClass" color="primary">
@@ -55,7 +63,8 @@
           <v-list-item
             v-for="item in classes_owned"
             :key="item.title"
-            style="margin-right: 25px"
+            :to="'/classes/' + item.code"
+            style="margin-right: 25px;"
           >
             <v-list-item-avatar size="25px" style="margin-right: 12px">
               <v-img :src="item.avatar"></v-img>
@@ -74,6 +83,7 @@
           <v-list-item
             v-for="item in classes_joined"
             :key="item.title"
+            :to="'/classes/' + item.code"
             style="margin-right: 25px"
           >
             <v-list-item-avatar size="25px" style="margin-right: 12px">
@@ -87,29 +97,6 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar fixed class="navbar" height="50%">
-      <v-avatar color="info" class="classAvatar">
-        <v-icon dark>
-          mdi-account-circle
-        </v-icon>
-      </v-avatar>
-      <v-list-item two-line>
-        <v-list-item-content>
-          <v-list-item-title class="className">Class 1</v-list-item-title>
-          <v-list-item-subtitle>@1ve423d</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <template v-slot:extension>
-        <v-tabs align-with-title>
-          <v-tab>Message</v-tab>
-          <v-tab>File</v-tab>
-          <v-tab to="/classes/people">People</v-tab>
-          <v-tab>Information</v-tab>
-          <v-tab to="/classes/settings">Setting</v-tab>
-        </v-tabs>
-      </template>
-      <v-btn right color="info">Add people</v-btn>
-    </v-app-bar>
   </v-card>
 </template>
 
@@ -132,18 +119,39 @@ export default {
           name: "Log in",
         },
       ],
+      selectedOption: 2,
       items: [
-        { title: "Account settings", icon: "mdi-cog-outline" },
-        { title: "Log out", icon: "mdi-logout-variant" },
+        { title: "Account settings", icon: "mdi-cog-outline", link: "/" },
+        { title: "Log out", icon: "mdi-logout-variant", link: "/" },
       ],
-      selectedClass: 1,
+      selectedClass: 0,
       classes_owned: [
-        { title: "Class 1", avatar: "/assets/class_avatar/apple.svg" },
-        { title: "Class 2", avatar: "/assets/class_avatar/art.svg" },
+        {
+          title: "Class 1",
+          code: "@1ve423d",
+          avatar: "/assets/class_avatar/apple.svg",
+          id: 1,
+        },
+        {
+          title: "Class 2",
+          code: "@454kgf4",
+          avatar: "/assets/class_avatar/art.svg",
+          id: 2,
+        },
       ],
       classes_joined: [
-        { title: "Class 1", avatar: "/assets/class_avatar/geography.svg" },
-        { title: "Class 2", avatar: "/assets/class_avatar/geometry.svg" },
+        {
+          title: "Class 3",
+          code: "@45g4trg",
+          avatar: "/assets/class_avatar/geography.svg",
+          id: 3,
+        },
+        {
+          title: "Class 4",
+          code: "@34gf45b",
+          avatar: "/assets/class_avatar/geometry.svg",
+          id: 4,
+        },
       ],
     };
   },
@@ -152,8 +160,9 @@ export default {
 
 <style scoped>
 .sidebar {
-  background-color: #f2f3f5;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: whitesmoke !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
 }
 
 .avatar {
@@ -167,24 +176,6 @@ export default {
 .group {
   margin-left: 5%;
   font-weight: 500;
-}
-
-.classAvatar {
-  margin-top: 10px;
-  margin-left: -2px;
-  margin-right: -8px;
-}
-
-.className {
-  font-size: larger;
-  font-weight: 500;
-  margin-top: 10px;
-}
-
-.navbar {
-  margin-left: 250px;
-  height: 50%;
-  background-color: white !important;
 }
 
 .createOrJoinClass {
