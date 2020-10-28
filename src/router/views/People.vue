@@ -1,6 +1,6 @@
 <template>
   <classline>
-    <v-container style="margin-left: 300px">
+    <v-container style="margin-left: 260px; margin-top: 100px;">
       <v-card>
         <v-card-title>
           <v-text-field
