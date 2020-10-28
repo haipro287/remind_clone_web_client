@@ -8,18 +8,6 @@ const instance = axios.create({
   baseURL: api.BASE_URL,
 });
 
-instance.interceptors.request.use(
-  request => {
-    if (instance.defaults.headers.common["Authorization"]) {
-      return request;
-    }
-    throw { message: "the token is not available" };
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
 instance.interceptors.response.use(
   response => response,
   error => {
