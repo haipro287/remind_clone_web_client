@@ -26,6 +26,7 @@ const actions = {
         .then(res => {
           commit(AUTH_SUCCESS, res.data);
           localStorage.setItem("token", res.data.data.token);
+          axios.defaults.headers.common["Authorization"] = res.data.data.token;
           resolve(res);
         })
         .catch(err => {
