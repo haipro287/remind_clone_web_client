@@ -1,3 +1,7 @@
+import About from "./views/About.vue";
+import Login from "./views/LoginScreen.vue";
+import Classes from "./views/MainScreen.vue";
+
 export default [
   {
     path: "/",
@@ -5,47 +9,54 @@ export default [
     component: () => import("./views/Home.vue"),
   },
   {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
     path: "/about",
     name: "About",
-    component: () => import("./views/About.vue"),
+    component: About,
   },
   {
     path: "/classes",
+    redirect: "/classes/0",
+  },
+  {
+    path: "/classes/:code",
     name: "Classes",
-    component: () => import("./views/MainScreen.vue"),
+    component: Classes,
     meta: {
       requiresAuth: true,
     },
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: () => import("./views/LoginScreen.vue"),
-  },
-  {
-    path: "/classes/settings",
-    name: "Settings Class",
-    component: () => import("./views/SettingsClassScreen.vue"),
-  },
-  {
-    path: "/classes/people",
-    name: "People",
-    component: () => import("./views/People.vue"),
-  },
-  {
-    path: "/settings/profile",
-    name: "Settings Profile",
-    component: () => import("./views/SettingsProfileScreen.vue"),
-  },
-  {
-    path: "/settings/notification",
-    name: "Settings Notification",
-    component: () => import("./views/SettingsNotificationScreen.vue"),
-  },
-  {
-    path: "/settings/message",
-    name: "Settings Message",
-    component: () => import("./views/SettingsMessageScreen.vue"),
+    children: [
+      {
+        path: "message",
+        alias: [""],
+        name: "Message",
+        component: () => import("./views/SettingsClassScreen.vue"), //thay bang Message
+      },
+      {
+        path: "files",
+        name: "Files",
+        component: () => import("./views/People.vue"), //thay bang Files
+      },
+      {
+        path: "people",
+        name: "People",
+        component: () => import("./views/People.vue"),
+      },
+      {
+        path: "information",
+        name: "Information",
+        component: () => import("./views/SettingsClassScreen.vue"), //thay bang Information
+      },
+      {
+        path: "settings",
+        name: "Settings Class",
+        component: () => import("./views/SettingsClassScreen.vue"),
+      },
+    ],
   },
   {
     path: "*",

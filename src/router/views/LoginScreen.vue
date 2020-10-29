@@ -67,7 +67,7 @@ export default {
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect);
         }
-        this.$router.push({ name: "Classes" });
+        this.$router.push({ path: "/classes" });
       });
     },
   },

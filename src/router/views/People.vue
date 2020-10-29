@@ -1,36 +1,33 @@
 <template>
-  <classline>
-    <v-container style="margin-left: 300px">
-      <v-card>
-        <v-card-title>
-          <v-text-field
-            v-model="search"
-            append-icon="mdi-magnify"
-            label="Search"
-            single-line
-            hide-details
-          ></v-text-field>
-        </v-card-title>
+  <v-container
+    style="margin-left: 270px; margin-top: 130px; max-width: 1160px;"
+  >
+    <v-card>
+      <v-card-title>
+        <v-text-field
+          v-model="search"
+          append-icon="mdi-magnify"
+          label="Search"
+          single-line
+          hide-details
+        ></v-text-field>
+      </v-card-title>
 
-        <v-data-table
-          v-model="selected"
-          :headers="headers"
-          :items="desserts"
-          :search="search"
-          item-key="name"
-          show-select
-          calculate-widths
-        ></v-data-table>
-      </v-card>
-    </v-container>
-  </classline>
+      <v-data-table
+        v-model="selected"
+        :headers="headers"
+        :items="desserts"
+        :search="search"
+        item-key="name"
+        show-select
+        calculate-widths
+      ></v-data-table>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
-import Classline from "../layouts/Classline.vue";
-
 export default {
-  components: { Classline },
   data() {
     return {
       expand: false,

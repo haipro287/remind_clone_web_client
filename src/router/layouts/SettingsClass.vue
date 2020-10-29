@@ -1,7 +1,6 @@
 <template>
-  <div>
-    <side-bar class="sidebar"> </side-bar>
-    <div class="block">
+  <v-container style="margin-left: 270px; margin-top: 130px;">
+    <v-card style="padding: 15px;">
       <v-form @submit.prevent="changeClassInfo">
         <h2> Class infomation </h2>
         <v-avatar size="69">
@@ -56,16 +55,12 @@
           </v-col>
         </v-row>
       </div>
-    </div>
-  </div>
+    </v-card>
+  </v-container>
 </template>
 <script>
-import SideBar from "../../components/SideBar.vue";
 export default {
   name: "SettingsClass",
-  components: {
-    SideBar,
-  },
   data() {
     return {
       classname: "Math",
@@ -91,12 +86,6 @@ export default {
 };
 </script>
 <style scoped>
-.block {
-  width: 100%;
-  height: auto;
-  margin-left: 255px;
-  padding: 30px;
-}
 .divider {
   margin-top: 20px;
   margin-bottom: 20px;

@@ -1,13 +1,16 @@
 <template>
-  <v-card>
+  <v-card class="overflow-hidden">
     <v-navigation-drawer fixed permanent left class="sidebar">
       <template v-slot:prepend>
-        <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="https://randomuser.me/api/portraits/women/81.jpg" />
+        <v-list-item two-line style="padding-top: 15px">
+          <v-list-item-avatar class="avatar">
+            <v-img
+              src="https://randomuser.me/api/portraits/women/81.jpg"
+              alt="avatar"
+            ></v-img>
           </v-list-item-avatar>
 
-          <v-list-item-content>
+          <v-list-item-content style="margin-left: -3%">
             <v-list-item-title>
               <div>
                 <v-menu offset-y>
@@ -23,15 +26,23 @@
                   </template>
 
                   <v-list dense>
-                    <v-list-item v-for="item in items" :key="item.title">
-                      <v-list-item-icon style="margin-right: 12px">
-                        <v-icon>{{ item.icon }}</v-icon>
-                      </v-list-item-icon>
+                    <v-list-item-group v-model="selectedOption" color="primary">
+                      <v-list-item
+                        v-for="item in items"
+                        :key="item.title"
+                        :href="'/classes'"
+                      >
+                        <v-list-item-icon style="margin-right: 12px">
+                          <v-icon>{{ item.icon }}</v-icon>
+                        </v-list-item-icon>
 
-                      <v-list-item-content>
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                      </v-list-item-content>
-                    </v-list-item>
+                        <v-list-item-content>
+                          <v-list-item-title>{{
+                            item.title
+                          }}</v-list-item-title>
+                        </v-list-item-content>
+                      </v-list-item>
+                    </v-list-item-group>
                   </v-list>
                 </v-menu>
               </div>
@@ -40,59 +51,52 @@
         </v-list-item>
       </template>
 
-      <v-divider></v-divider>
-      <br />
+      <v-divider style="margin-top: 14px"></v-divider>
 
-      <v-list dense class="listClass">
-        <strong class="group">Classes Owned</strong><br />
+      <v-list class="listClass">
+        <v-list-item-group v-model="selectedClass" color="primary">
+          <v-subheader>Classes Owned</v-subheader>
+          <a class="createOrJoinClass"
+            ><v-icon class="iconAdd">mdi-plus-circle-outline</v-icon> Create a
+            class</a
+          >
+          <v-list-item
+            v-for="item in classes_owned"
+            :key="item.title"
+            :to="'/classes/' + item.code"
+            style="margin-right: 25px;"
+          >
+            <v-list-item-avatar size="25px" style="margin-right: 12px">
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
 
-        <v-list-item v-for="item in classes_owned" :key="item.title">
-          <v-list-item-icon style="margin-right: 12px">
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-subheader>Classes Joined</v-subheader>
+          <a class="createOrJoinClass"
+            ><v-icon class="iconAdd">mdi-plus-circle-outline</v-icon> Join a
+            class</a
+          >
+          <v-list-item
+            v-for="item in classes_joined"
+            :key="item.title"
+            :to="'/classes/' + item.code"
+            style="margin-right: 25px"
+          >
+            <v-list-item-avatar size="25px" style="margin-right: 12px">
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
 
-        <br />
-
-        <strong class="group">Classes Joined</strong>
-        <v-list-item v-for="item in classes_joined" :key="item.title">
-          <v-list-item-icon style="margin-right: 12px">
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar class="navbar" height="50%">
-      <v-avatar color="info">
-        <v-icon dark>
-          mdi-account-circle
-        </v-icon>
-      </v-avatar>
-      <v-list-item two-line>
-        <v-list-item-content>
-          <v-list-item-title class="className">Class 1</v-list-item-title>
-          <v-list-item-subtitle>@1ve423d</v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-      <template v-slot:extension>
-        <v-tabs align-with-title>
-          <v-tab>Message</v-tab>
-          <v-tab>File</v-tab>
-          <v-tab to="/classes/people">People</v-tab>
-          <v-tab>Information</v-tab>
-          <v-tab to="/classes/settings">Setting</v-tab>
-        </v-tabs>
-      </template>
-      <v-btn right color="info">Add people</v-btn>
-    </v-app-bar>
   </v-card>
 </template>
 
@@ -115,19 +119,39 @@ export default {
           name: "Log in",
         },
       ],
+      selectedOption: 2,
       items: [
-        { title: "Account settings", icon: "mdi-cog-outline" },
-        { title: "Log out", icon: "mdi-logout-variant" },
+        { title: "Account settings", icon: "mdi-cog-outline", link: "/" },
+        { title: "Log out", icon: "mdi-logout-variant", link: "/" },
       ],
+      selectedClass: 0,
       classes_owned: [
-        { title: "Create a class", icon: "mdi-plus-circle-outline" },
-        { title: "Class 1", icon: "mdi-google-classroom" },
-        { title: "Class 2", icon: "mdi-google-classroom" },
+        {
+          title: "Class 1",
+          code: "1ve423d",
+          avatar: "/assets/class_avatar/apple.svg",
+          id: 1,
+        },
+        {
+          title: "Class 2",
+          code: "454kgf4",
+          avatar: "/assets/class_avatar/art.svg",
+          id: 2,
+        },
       ],
       classes_joined: [
-        { title: "Join a class", icon: "mdi-plus-circle-outline" },
-        { title: "Class 1", icon: "mdi-google-classroom" },
-        { title: "Class 2", icon: "mdi-google-classroom" },
+        {
+          title: "Class 3",
+          code: "45g4trg",
+          avatar: "/assets/class_avatar/geography.svg",
+          id: 3,
+        },
+        {
+          title: "Class 4",
+          code: "34gf45b",
+          avatar: "/assets/class_avatar/geometry.svg",
+          id: 4,
+        },
       ],
     };
   },
@@ -136,7 +160,13 @@ export default {
 
 <style scoped>
 .sidebar {
-  background-color: #f2f3f5;
+  background-color: whitesmoke !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+    0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
+}
+
+.avatar {
+  margin-left: 5%;
 }
 
 .listClass {
@@ -148,14 +178,13 @@ export default {
   font-weight: 500;
 }
 
-.className {
-  font-size: larger;
-  font-weight: 500;
+.createOrJoinClass {
+  color: #2196f3;
+  padding-left: 16px;
 }
 
-.navbar {
-  margin-left: 250px;
-  height: 50%;
-  background-color: white !important;
+.iconAdd {
+  color: #2196f3;
+  margin-right: 7px;
 }
 </style>
