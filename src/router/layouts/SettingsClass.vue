@@ -1,5 +1,5 @@
 <template>
-  <v-container style="margin-left: 260px; margin-top: 100px;">
+  <v-container style="margin-left: 270px; margin-top: 130px;">
     <v-card style="padding: 15px;">
       <v-form @submit.prevent="changeClassInfo">
         <h2> Class infomation </h2>

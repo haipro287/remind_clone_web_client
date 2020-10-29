@@ -2,7 +2,7 @@
   <v-card class="overflow-hidden">
     <v-navigation-drawer fixed permanent left class="sidebar">
       <template v-slot:prepend>
-        <v-list-item two-line style="padding-top: 5px">
+        <v-list-item two-line style="padding-top: 15px">
           <v-list-item-avatar class="avatar">
             <v-img
               src="https://randomuser.me/api/portraits/women/81.jpg"
@@ -51,7 +51,7 @@
         </v-list-item>
       </template>
 
-      <v-divider style="margin-top: 6px"></v-divider>
+      <v-divider style="margin-top: 14px"></v-divider>
 
       <v-list class="listClass">
         <v-list-item-group v-model="selectedClass" color="primary">
@@ -128,13 +128,13 @@ export default {
       classes_owned: [
         {
           title: "Class 1",
-          code: "@1ve423d",
+          code: "1ve423d",
           avatar: "/assets/class_avatar/apple.svg",
           id: 1,
         },
         {
           title: "Class 2",
-          code: "@454kgf4",
+          code: "454kgf4",
           avatar: "/assets/class_avatar/art.svg",
           id: 2,
         },
@@ -142,13 +142,13 @@ export default {
       classes_joined: [
         {
           title: "Class 3",
-          code: "@45g4trg",
+          code: "45g4trg",
           avatar: "/assets/class_avatar/geography.svg",
           id: 3,
         },
         {
           title: "Class 4",
-          code: "@34gf45b",
+          code: "34gf45b",
           avatar: "/assets/class_avatar/geometry.svg",
           id: 4,
         },

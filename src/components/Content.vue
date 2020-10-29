@@ -1,17 +1,17 @@
 <template>
   <v-card class="overflow-hidden">
-    <v-app-bar fixed class="navbar" height="50%">
+    <v-app-bar fixed class="navbar" height="70%">
       <v-avatar size="40px" color="info" class="classAvatar">
         <v-img src="/assets/class_avatar/apple.svg"> </v-img>
       </v-avatar>
       <v-list-item two-line>
         <v-list-item-content>
           <v-list-item-title class="className">Class 1</v-list-item-title>
-          <v-list-item-subtitle>{{ $route.params.code }}</v-list-item-subtitle>
+          <v-list-item-subtitle>@{{ $route.params.code }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <template v-slot:extension>
-        <v-tabs centered center-active color="#2196f3">
+        <v-tabs align-with-title center-active color="#2196f3">
           <v-tab>
             <router-link tag="li" class="router-link" :to="{ name: 'Message' }"
               >Message</router-link
@@ -45,9 +45,7 @@
           </v-tab>
         </v-tabs>
       </template>
-      <v-btn style="margin-right: 5px; margin-top: 25px" right color="info"
-        >Add people</v-btn
-      >
+      <v-btn style="margin-right: -3px;" right color="info">Add people</v-btn>
     </v-app-bar>
   </v-card>
 </template>
@@ -63,15 +61,14 @@ export default {
 
 <style scoped>
 .classAvatar {
-  margin-top: 25px;
-  margin-left: 10px;
+  margin-left: 5px;
   margin-right: -8px;
 }
 
 .className {
   font-size: larger;
   font-weight: 500;
-  margin-top: 25px;
+  margin-top: -2px;
 }
 
 .navbar {
@@ -83,6 +80,7 @@ export default {
 li {
   list-style-type: none;
 }
+
 li.router-link-active {
   color: #2196f3;
   font-weight: bold;
