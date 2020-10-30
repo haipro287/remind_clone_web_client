@@ -56,10 +56,7 @@
       <v-list class="listClass">
         <v-list-item-group v-model="selectedClass" color="primary">
           <v-subheader>Classes Owned</v-subheader>
-          <a class="createOrJoinClass"
-            ><v-icon class="iconAdd">mdi-plus-circle-outline</v-icon> Create a
-            class</a
-          >
+          <create-class></create-class>
           <v-list-item
             v-for="item in classes_owned"
             :key="item.title"
@@ -101,8 +98,10 @@
 </template>
 
 <script>
+import CreateClass from "./CreateClass.vue";
 export default {
   name: "SideBar",
+  components: { CreateClass },
   data() {
     return {
       links: [
@@ -186,5 +185,6 @@ export default {
 .iconAdd {
   color: #2196f3;
   margin-right: 7px;
+  margin-bottom: 2px;
 }
 </style>
