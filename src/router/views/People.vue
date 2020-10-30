@@ -1,7 +1,5 @@
 <template>
-  <v-container
-    style="margin-left: 270px; margin-top: 130px; max-width: 1160px;"
-  >
+  <v-container>
     <v-card>
       <v-card-title>
         <v-text-field
