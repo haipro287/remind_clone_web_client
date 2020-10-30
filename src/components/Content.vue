@@ -1,6 +1,6 @@
 <template>
-  <v-card class="overflow-hidden">
-    <v-app-bar fixed class="navbar" height="70%">
+  <v-app-bar app>
+    <v-toolbar-title class="ml-2">
       <v-list-item two-line>
         <v-list-item-avatar>
           <v-img src="/assets/class_avatar/apple.svg"> </v-img>
@@ -10,21 +10,21 @@
           <v-list-item-subtitle>@{{ $route.params.code }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-      <v-spacer />
-      <v-btn style="margin-right: -3px;" right color="info">Add people</v-btn>
-      <template v-slot:extension>
-        <v-tabs align-with-title center-active color="#2196f3">
-          <v-tab
-            v-for="tab in tabs"
-            :key="tab.name"
-            @click="$router.push({ name: tab.routeName })"
-          >
-            {{ tab.name }}
-          </v-tab>
-        </v-tabs>
-      </template>
-    </v-app-bar>
-  </v-card>
+    </v-toolbar-title>
+    <v-spacer />
+    <v-btn style="margin-right: -3px;" right color="info">Add people</v-btn>
+    <template v-slot:extension>
+      <v-tabs align-with-title color="#2196f3">
+        <v-tab
+          v-for="tab in tabs"
+          :key="tab.name"
+          @click="$router.push({ name: tab.routeName })"
+        >
+          {{ tab.name }}
+        </v-tab>
+      </v-tabs>
+    </template>
+  </v-app-bar>
 </template>
 
 <script>
