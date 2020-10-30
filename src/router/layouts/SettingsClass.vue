@@ -1,8 +1,8 @@
 <template>
-  <v-container>
-    <v-card style="padding: 15px;">
-      <v-form @submit.prevent="changeClassInfo">
-        <h2> Class infomation </h2>
+  <v-container class=" mx-0 ml-5">
+    <v-card class="pa-4" elevation="1">
+      <v-card-title> Class infomation </v-card-title>
+      <v-card-text>
         <v-avatar size="69">
           <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
         </v-avatar>
@@ -19,11 +19,16 @@
             <v-text-field v-model="classcode" outlined> </v-text-field>
           </v-col>
         </v-row>
-        <v-btn type="submit" color="primary"> Save </v-btn>
-      </v-form>
-      <v-divider class="divider"></v-divider>
-      <v-form>
-        <h2>Class settings</h2>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn type="submit" color="primary" @click.prevent="changeClassInfo">
+          Save
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+    <v-card class="mt-3" elevation="1">
+      <v-card-title>Class settings</v-card-title>
+      <v-card-text>
         <v-checkbox
           v-model="requiredToJoin"
           :label="`Require approval to join`"
@@ -34,14 +39,14 @@
           <v-radio label="Role-based" value="Rolebased"> </v-radio>
           <v-radio label="Off" value="Off"> </v-radio>
         </v-radio-group>
-      </v-form>
-      <v-divider class="divider"></v-divider>
-      <v-form>
-        <h2>Class owners</h2>
-      </v-form>
-      <v-divider class="divider"></v-divider>
-      <div>
-        <h3>Archiving</h3>
+      </v-card-text>
+    </v-card>
+    <v-card class="mt-3" elevation="1">
+      <v-card-title>Class owners</v-card-title>
+    </v-card>
+    <v-card class="mt-3" elevation="1">
+      <v-card-title>Archiving</v-card-title>
+      <v-card-text>
         <v-row>
           <v-col sm="3" cols="12">
             <h5>Reuse class code</h5>
@@ -54,7 +59,7 @@
             <v-btn color="error" @click="removeClass">Remove class</v-btn>
           </v-col>
         </v-row>
-      </div>
+      </v-card-text>
     </v-card>
   </v-container>
 </template>
