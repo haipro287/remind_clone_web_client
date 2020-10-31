@@ -2,14 +2,14 @@
   <v-dialog v-model="show" persistent max-width="600px">
     <v-card>
       <v-toolbar dark color="primary" style="height: 80px;">
-        <v-btn icon text @click="show = false" style="margin-top: 18px;">
-          <v-icon>mdi-close</v-icon>
-        </v-btn>
         <v-toolbar-title
-          style="margin-left: 150px; margin-top: 18px; font-size: 25px"
+          style="margin-left: 210px; margin-top: 18px; font-size: 25px"
           >Select a icon</v-toolbar-title
         >
         <v-spacer></v-spacer>
+        <v-btn icon text @click="show = false" style="margin-top: 18px;">
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
       </v-toolbar>
       <v-layout style="margin-left: 8px" row wrap v-if="avatars">
         <v-flex v-for="avatar in avatars" :key="avatar.id" xs4 sm3 d-flex>

@@ -39,7 +39,7 @@ export default [
       {
         path: "files",
         name: "Files",
-        component: () => import("./views/People.vue"), //thay bang Files
+        component: () => import("./views/Files.vue"),
       },
       {
         path: "people",
