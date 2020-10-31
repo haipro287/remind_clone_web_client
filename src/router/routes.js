@@ -49,7 +49,7 @@ export default [
       {
         path: "information",
         name: "Information",
-        component: () => import("./views/SettingsClassScreen.vue"), //thay bang Information
+        component: () => import("./views/ClassInformation.vue"),
       },
       {
         path: "settings",
