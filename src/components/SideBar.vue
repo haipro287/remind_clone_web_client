@@ -70,10 +70,7 @@
         </v-list-item>
 
         <v-subheader>Classes Joined</v-subheader>
-        <a class="createOrJoinClass"
-          ><v-icon class="iconAdd">mdi-plus-circle-outline</v-icon> Join a
-          class</a
-        >
+        <join-class></join-class>
         <v-list-item
           v-for="item in classes_joined"
           :key="item.title"
@@ -95,9 +92,10 @@
 
 <script>
 import CreateClass from "./CreateClass.vue";
+import JoinClass from "./JoinClass.vue";
 export default {
   name: "SideBar",
-  components: { CreateClass },
+  components: { CreateClass, JoinClass },
   data() {
     return {
       links: [

@@ -12,7 +12,7 @@
       </v-list-item>
     </v-toolbar-title>
     <v-spacer />
-    <v-btn style="margin-right: -3px;" right color="info">Add people</v-btn>
+    <add-people></add-people>
     <template v-slot:extension>
       <v-tabs align-with-title color="#2196f3">
         <v-tab
@@ -28,8 +28,10 @@
 </template>
 
 <script>
+import AddPeople from "./AddPeople.vue";
 export default {
   name: "Content",
+  components: { AddPeople },
   data() {
     return {
       tabs: [
