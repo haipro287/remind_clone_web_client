@@ -34,7 +34,7 @@
                   <a
                     style="color: #2196f3; font-size: 16px"
                     @click="openAvatarPicker"
-                    >Change Avatar</a
+                    >Change icon</a
                   >
                 </v-container>
               </v-col>
@@ -43,7 +43,7 @@
                   <v-text-field label="Class name" required></v-text-field>
                 </v-col>
                 <v-col cols="12" md="12">
-                  <v-text-field label="Class code"></v-text-field>
+                  <v-text-field prefix="@" label="Class code"></v-text-field>
                 </v-col>
               </v-col>
             </v-row>
@@ -73,7 +73,6 @@ export default {
   data() {
     return {
       dialog: false,
-      icons: false,
       avatar: "apple",
       showAvatarPicker: false,
     };
