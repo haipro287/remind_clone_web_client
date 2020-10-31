@@ -48,7 +48,7 @@
       </v-list-item>
     </template>
 
-    <v-divider style="margin-top: 14px"></v-divider>
+    <v-divider style="margin-top: 10px"></v-divider>
 
     <v-list class="listClass">
       <v-list-item-group v-model="selectedClass" color="primary">
