@@ -34,7 +34,7 @@ export default [
         path: "message",
         alias: [""],
         name: "Message",
-        component: () => import("./views/SettingsClassScreen.vue"), //thay bang Message
+        component: () => import("./views/MessageScreen.vue"), //thay bang Message
       },
       {
         path: "files",
