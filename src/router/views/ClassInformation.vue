@@ -8,9 +8,7 @@
             <v-list-item two-line>
               <v-list-item-content>
                 <v-list-item-title v-text="item.title"></v-list-item-title>
-                <v-list-item-subtitle
-                  v-text="item.value"
-                ></v-list-item-subtitle>
+                <v-list-item-subtitle v-text="item.value"></v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-row>
@@ -23,29 +21,16 @@
       <v-btn style="margin-left: 15px" outlined color="error">
         Leave class
       </v-btn>
-      <v-subheader
-        >You will no longer receive announcements from Web
-        Development.</v-subheader
-      >
+      <v-subheader>You will no longer receive announcements from Web Development.</v-subheader>
       <v-card-actions></v-card-actions>
     </v-card>
     <v-card class="mt-3 pa-4" elevation="1">
       <v-list max-width="500px">
         <v-card-title>Class owners</v-card-title>
-        <v-card-subtitle
-          >Class owners can send announcements and individual messages to
-          participants.</v-card-subtitle
-        >
-        <v-list-item
-          v-for="owner in owners"
-          :key="owner.name"
-          @click.stop="abc"
-        >
+        <v-card-subtitle>Class owners can send announcements and individual messages to participants.</v-card-subtitle>
+        <v-list-item v-for="owner in owners" :key="owner.name" @click.stop="abc">
           <v-list-item-avatar>
-            <v-img
-              src="https://randomuser.me/api/portraits/women/81.jpg"
-              alt="avatar"
-            ></v-img>
+            <v-img src="https://randomuser.me/api/portraits/women/81.jpg" alt="avatar"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>

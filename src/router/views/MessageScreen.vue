@@ -2,17 +2,11 @@
   <v-container fluid class="d-flex pa-0">
     <div class="fit-v-viewport pr-1 col-3" id="conversation-list">
       <v-list v-for="convo in conversationList" :key="convo.id">
-        <conversation-item
-          :convoName="convo.convoName"
-          :avatarUrl="convo.avatarUrl"
-        />
+        <conversation-item :convoName="convo.convoName" :avatarUrl="convo.avatarUrl" />
       </v-list>
     </div>
     <div class="d-flex flex-column width-100 fit-v-viewport">
-      <div
-        id="conversation-app-bar"
-        class="pa-5 d-flex align-center justify-space-between"
-      >
+      <div id="conversation-app-bar" class="pa-5 d-flex align-center justify-space-between">
         <h3>Annie Edison</h3>
         <v-btn icon>
           <v-icon>mdi-alert-circle-outline</v-icon>
@@ -20,11 +14,7 @@
       </div>
       <div id="message-list-item" class="fill-height">
         <message-list-date date="October 20, 2020" />
-        <message-item
-          v-for="message in messageList"
-          :key="message.id"
-          :message="message"
-        />
+        <message-item v-for="message in messageList" :key="message.id" :message="message" />
       </div>
       <message-text-box />
     </div>
@@ -83,10 +73,8 @@ export default {
           },
           conversationId: 1,
           message: {
-            richText:
-              "Someone like you. Someone who'll rattle the cages. Does it come in black?",
-            text:
-              "Someone like you. Someone who'll rattle the cages. Does it come in black?",
+            richText: "Someone like you. Someone who'll rattle the cages. Does it come in black?",
+            text: "Someone like you. Someone who'll rattle the cages. Does it come in black?",
           },
           createdAt: "10:18 AM",
         },
