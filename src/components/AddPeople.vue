@@ -107,7 +107,7 @@
                                     <v-icon large @click="add" color="primary"
                                       >mdi-plus-circle</v-icon
                                     >
-                                    <v-icon large @click="remove(i)" color="red"
+                                    <v-icon large @click="remove()" color="red"
                                       >mdi-minus-circle</v-icon
                                     >
                                   </v-row>
@@ -164,9 +164,10 @@ export default {
         emailValue: "",
       });
     },
-    remove(index) {
+    remove() {
       if (this.students.length > 1) {
-        this.students.splice(index, 1);
+        let last = this.students.length - 1;
+        this.students.splice(last, 1);
       }
     },
   },
