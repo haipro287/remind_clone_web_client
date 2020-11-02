@@ -4,19 +4,10 @@
       <v-card-title> Class information </v-card-title>
       <v-card-text>
         <v-avatar size="96" class="mr-4">
-          <img
-            :src="'/assets/class_avatar/' + avatar.toLowerCase() + '.svg'"
-            alt="Avatar"
-          />
+          <img :src="'/assets/class_avatar/' + avatar.toLowerCase() + '.svg'" alt="Avatar" />
         </v-avatar>
-        <a style="color: #2196f3; font-size: 16px" @click="openAvatarPicker"
-          >Change icon</a
-        >
-        <icon-picker
-          v-model="showAvatarPicker"
-          :current-avatar="avatar"
-          @selected="selectAvatar"
-        ></icon-picker>
+        <a style="color: #2196f3; font-size: 16px" @click="openAvatarPicker">Change icon</a>
+        <icon-picker v-model="showAvatarPicker" :current-avatar="avatar" @selected="selectAvatar"></icon-picker>
         <br /><br />
         <v-row>
           <v-col sm="6">
@@ -32,14 +23,7 @@
         </v-row>
         <v-row>
           <v-col sm="6">
-            <v-text-field
-              dense
-              prefix="@"
-              v-model="classcode"
-              label="Class code"
-              outlined
-            >
-            </v-text-field>
+            <v-text-field dense prefix="@" v-model="classcode" label="Class code" outlined> </v-text-field>
           </v-col>
         </v-row>
       </v-card-text>
@@ -52,10 +36,7 @@
     <v-card class="mt-3 pa-4" elevation="1">
       <v-card-title>Class settings</v-card-title>
       <v-card-text style="margin-top: -15px">
-        <v-checkbox
-          v-model="requiredToJoin"
-          :label="`Require approval to join`"
-        ></v-checkbox>
+        <v-checkbox v-model="requiredToJoin" :label="`Require approval to join`"></v-checkbox>
         <h5>Participant messaging</h5>
         <v-radio-group v-model="participantMess" class="mt-1">
           <v-radio label="On" value="On"> </v-radio>
@@ -68,20 +49,12 @@
       <v-list max-width="500px">
         <v-card-title>Class owners</v-card-title>
         <v-card-subtitle
-          >Class owners can see and send messages to class participants. Once
-          somebody becomes a class owner, they cannot be
-          removed.</v-card-subtitle
+          >Class owners can see and send messages to class participants. Once somebody becomes a class owner, they
+          cannot be removed.</v-card-subtitle
         >
-        <v-list-item
-          v-for="owner in owners"
-          :key="owner.name"
-          @click.stop="abc"
-        >
+        <v-list-item v-for="owner in owners" :key="owner.name" @click.stop="abc">
           <v-list-item-avatar>
-            <v-img
-              src="https://randomuser.me/api/portraits/women/81.jpg"
-              alt="avatar"
-            ></v-img>
+            <v-img src="https://randomuser.me/api/portraits/women/81.jpg" alt="avatar"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
@@ -109,15 +82,11 @@
         <v-row>
           <v-col lg="3" cols="6">
             <h5>Reuse class code</h5>
-            <v-btn outlined color="error" @click="reuseClassCode"
-              >Reuse class code</v-btn
-            >
+            <v-btn outlined color="error" @click="reuseClassCode">Reuse class code</v-btn>
           </v-col>
           <v-col lg="3" cols="6">
             <h5>Remove class</h5>
-            <v-btn outlined color="error" @click="removeClass"
-              >Remove class</v-btn
-            >
+            <v-btn outlined color="error" @click="removeClass">Remove class</v-btn>
           </v-col>
         </v-row>
       </v-card-text>

@@ -24,8 +24,7 @@
             @click:append="showPassword = !showPassword"
           >
           </v-text-field>
-          <v-checkbox v-model="keepsignin" :label="`Stay logged in`">
-          </v-checkbox>
+          <v-checkbox v-model="keepsignin" :label="`Stay logged in`"> </v-checkbox>
           <v-btn block elevation="4" color="primary" @click="login()">
             Log in
           </v-btn>
@@ -33,9 +32,10 @@
           <v-btn block elevation="4">
             Sign in with google
           </v-btn>
-          <p class="orDivider"
-            >Don't have an account? <a ref=""> Sign up!</a></p
-          >
+          <p class="orDivider">
+            Don't have an account?
+            <a ref=""> Sign up!</a>
+          </p>
         </v-form>
       </div>
     </div>

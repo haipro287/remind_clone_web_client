@@ -1,9 +1,4 @@
-import {
-  AUTH_LOGIN,
-  AUTH_LOGOUT,
-  AUTH_ERROR,
-  AUTH_SUCCESS,
-} from "../actions/auth";
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_SUCCESS } from "../actions/auth";
 import axios from "../../services/axios";
 
 const state = {
@@ -26,7 +21,6 @@ const actions = {
         .then(res => {
           commit(AUTH_SUCCESS, res.data);
           localStorage.setItem("token", res.data.data.token);
-          axios.defaults.headers.common["Authorization"] = res.data.data.token;
           resolve(res);
         })
         .catch(err => {
