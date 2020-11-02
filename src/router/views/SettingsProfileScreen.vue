@@ -1,10 +1,7 @@
 <template>
   <settings-user-layout>
     <v-container>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
-        rel="stylesheet"
-      />
+      <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
       <v-row>
         <v-avatar size="150" class="avatar">
           <img src="/assets/useravatar.jpg" />
@@ -30,13 +27,7 @@
         <v-row>
           <v-col>
             <h5>Country</h5>
-            <v-select
-              v-model="userCountry"
-              :items="countries"
-              menu-props="auto"
-              outlined
-            >
-            </v-select>
+            <v-select v-model="userCountry" :items="countries" menu-props="auto" outlined> </v-select>
           </v-col>
         </v-row>
         <v-btn @click="savePersonInfo" color="primary">Save</v-btn>
@@ -47,19 +38,11 @@
         <v-row>
           <v-col>
             <h5>New password</h5>
-            <v-text-field
-              type="password"
-              v-model="newpassword"
-              outlined
-            ></v-text-field>
+            <v-text-field type="password" v-model="newpassword" outlined></v-text-field>
           </v-col>
           <v-col>
             <h5>Retype password</h5>
-            <v-text-field
-              type="password"
-              v-model="rePassword"
-              outlined
-            ></v-text-field>
+            <v-text-field type="password" v-model="rePassword" outlined></v-text-field>
           </v-col>
         </v-row>
         <v-btn @click="savePassword" color="primary">Save</v-btn>
@@ -74,17 +57,13 @@
             </v-list-item>
           </v-list>
           <v-btn @click="addParent" tile color="primary">
-            <v-icon left>
-              mdi-plus
-            </v-icon>
+            <v-icon left> mdi-plus </v-icon>
             Add parent
           </v-btn>
         </v-col>
       </v-row>
       <v-divider class="dividerCSS"></v-divider>
-      <v-btn @click="deleteAccount" outlined color="error"
-        >Delete Account</v-btn
-      >
+      <v-btn @click="deleteAccount" outlined color="error">Delete Account</v-btn>
     </v-container>
   </settings-user-layout>
 </template>
@@ -101,15 +80,7 @@ export default {
       firstname: "Viet Anh",
       lastname: "Dinh",
       userCountry: "Viet Nam",
-      countries: [
-        "Viet Nam",
-        "China",
-        "Japan",
-        "Russia",
-        "Poland",
-        "England",
-        "Holand",
-      ],
+      countries: ["Viet Nam", "China", "Japan", "Russia", "Poland", "England", "Holand"],
       newpassword: "",
       rePassword: "",
       parents: ["Daddy", "Mommy", "Buddy", "ChoDy"],

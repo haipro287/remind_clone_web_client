@@ -7,9 +7,7 @@
 
         <v-list-item v-for="file in files" :key="file.name" @click.stop="showFileDetails = true">
           <v-list-item-avatar>
-            <v-icon class="blue lighten-1" dark>
-              mdi-file
-            </v-icon>
+            <v-icon class="blue lighten-1" dark> mdi-file </v-icon>
           </v-list-item-avatar>
 
           <v-list-item-content>

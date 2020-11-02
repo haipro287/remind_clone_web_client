@@ -17,12 +17,7 @@
             <v-list-item-title><h3>BACK</h3></v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          link
-          @click="$router.push({ path: item.link })"
-        >
+        <v-list-item v-for="(item, i) in items" :key="i" link @click="$router.push({ path: item.link })">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>

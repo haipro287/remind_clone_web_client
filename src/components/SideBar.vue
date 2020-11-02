@@ -3,10 +3,7 @@
     <template v-slot:prepend>
       <v-list-item two-line style="padding-top: 15px">
         <v-list-item-avatar class="avatar">
-          <v-img
-            src="https://randomuser.me/api/portraits/women/81.jpg"
-            alt="avatar"
-          ></v-img>
+          <v-img src="https://randomuser.me/api/portraits/women/81.jpg" alt="avatar"></v-img>
         </v-list-item-avatar>
 
         <v-list-item-content style="margin-left: -3%">
@@ -17,20 +14,14 @@
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-subtitle>Hello,</v-list-item-subtitle>
-                      <v-list-item-title v-bind="attrs" v-on="on">
-                        Pham Thi Dan
-                      </v-list-item-title>
+                      <v-list-item-title v-bind="attrs" v-on="on"> Pham Thi Dan </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </template>
 
                 <v-list dense>
                   <v-list-item-group v-model="selectedOption" color="primary">
-                    <v-list-item
-                      v-for="item in items"
-                      :key="item.title"
-                      :href="'/classes'"
-                    >
+                    <v-list-item v-for="item in items" :key="item.title" :href="'/classes'">
                       <v-list-item-icon style="margin-right: 12px">
                         <v-icon>{{ item.icon }}</v-icon>
                       </v-list-item-icon>
@@ -58,7 +49,7 @@
           v-for="item in classes_owned"
           :key="item.title"
           :to="'/classes/' + item.code"
-          style="margin-right: 25px;"
+          style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">
             <v-img :src="item.avatar"></v-img>
@@ -154,8 +145,7 @@ export default {
 <style scoped>
 .sidebar {
   background-color: whitesmoke !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
 }
 
 .avatar {

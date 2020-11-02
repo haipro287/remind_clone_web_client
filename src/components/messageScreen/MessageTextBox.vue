@@ -1,10 +1,6 @@
 <template>
   <div id="container" class="pa-3">
-    <textarea
-      placeholder="Send a message..."
-      class="width-100 pa-2"
-      id="message-text-box-input"
-    ></textarea>
+    <textarea placeholder="Send a message..." class="width-100 pa-2" id="message-text-box-input"></textarea>
     <div id="message-text-box-menu" class="d-flex">
       <v-btn icon tile color="primary">
         <v-icon>mdi-file</v-icon>

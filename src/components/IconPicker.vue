@@ -1,13 +1,10 @@
 <template>
   <v-dialog v-model="show" persistent max-width="600px">
     <v-card>
-      <v-toolbar dark color="primary" style="height: 80px;">
-        <v-toolbar-title
-          style="margin-left: 210px; margin-top: 18px; font-size: 25px"
-          >Select a icon</v-toolbar-title
-        >
+      <v-toolbar dark color="primary" style="height: 80px">
+        <v-toolbar-title style="margin-left: 210px; margin-top: 18px; font-size: 25px">Select a icon</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon text @click="show = false" style="margin-top: 18px;">
+        <v-btn icon text @click="show = false" style="margin-top: 18px">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
@@ -46,11 +43,7 @@ export default {
   computed: {
     avatars() {
       let avatars = {};
-      let files = require.context(
-        "../../public/assets/class_avatar",
-        true,
-        /\.svg$/i
-      );
+      let files = require.context("../../public/assets/class_avatar", true, /\.svg$/i);
       files.keys().map(key => {
         let id = key
           .split("/")

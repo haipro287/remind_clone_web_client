@@ -18,9 +18,7 @@
     </v-card>
     <v-card class="mt-3 pa-4" elevation="1">
       <v-card-title></v-card-title>
-      <v-btn style="margin-left: 15px" outlined color="error">
-        Leave class
-      </v-btn>
+      <v-btn style="margin-left: 15px" outlined color="error"> Leave class </v-btn>
       <v-subheader>You will no longer receive announcements from Web Development.</v-subheader>
       <v-card-actions></v-card-actions>
     </v-card>

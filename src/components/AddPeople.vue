@@ -1,26 +1,14 @@
 <template>
   <v-dialog v-model="dialog" fullscreen>
     <template v-slot:activator="{ on, attrs }">
-      <v-btn
-        v-bind="attrs"
-        v-on="on"
-        style="margin-right: 10px;"
-        right
-        color="info"
-      >
-        Add people</v-btn
-      >
+      <v-btn v-bind="attrs" v-on="on" style="margin-right: 10px" right color="info"> Add people</v-btn>
     </template>
     <v-card>
       <v-toolbar>
-        <v-icon style="color: green; margin-right: 10px"
-          >mdi-account-multiple-plus</v-icon
-        >
+        <v-icon style="color: green; margin-right: 10px">mdi-account-multiple-plus</v-icon>
         <v-toolbar-title> Add People</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn @click="dialog = false">
-          Close
-        </v-btn>
+        <v-btn @click="dialog = false"> Close </v-btn>
       </v-toolbar>
       <v-divider></v-divider>
       <v-card-text>
@@ -32,12 +20,8 @@
                   <v-img src="/assets/class_avatar/apple.svg"> </v-img>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-title class="className"
-                    >Class 1</v-list-item-title
-                  >
-                  <v-list-item-subtitle
-                    >@{{ $route.params.code }}</v-list-item-subtitle
-                  >
+                  <v-list-item-title class="className">Class 1</v-list-item-title>
+                  <v-list-item-subtitle>@{{ $route.params.code }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-col>
@@ -60,25 +44,17 @@
                           dark
                           elevate-on-scroll
                           color="#F2F3F5"
-                          style="color: black; font-weight: bold;; margn-bottom: 10px"
+                          style="color: black; font-weight: bold; margn-bottom: 10px"
                         >
                           <v-row>
-                            <v-col class="sttHeader" cols="1" lg="1">
-                              STT
-                            </v-col>
-                            <v-col cols="5" lg="5">
-                              Name
-                            </v-col>
-                            <v-col cols="5" lg="5">
-                              Email
-                            </v-col>
-                            <v-col cols="1" lg="1">
-                              Action
-                            </v-col>
+                            <v-col class="sttHeader" cols="1" lg="1"> STT </v-col>
+                            <v-col cols="5" lg="5"> Name </v-col>
+                            <v-col cols="5" lg="5"> Email </v-col>
+                            <v-col cols="1" lg="1"> Action </v-col>
                           </v-row>
                         </v-app-bar>
                         <v-sheet class="overflow-y-auto" max-height="400">
-                          <v-container style="height: 500px;">
+                          <v-container style="height: 500px">
                             <!-- Thay students = {{ item.value }} ???-->
                             <div v-for="(person, i) in students" :key="i">
                               <v-row style="">
@@ -86,30 +62,16 @@
                                   {{ person.stt }}
                                 </v-col>
                                 <v-col cols="5" lg="5">
-                                  <v-text-field
-                                    dense
-                                    :label="person.name"
-                                    v-model="person.nameValue"
-                                  >
-                                  </v-text-field>
+                                  <v-text-field dense :label="person.name" v-model="person.nameValue"> </v-text-field>
                                 </v-col>
 
                                 <v-col cols="5" lg="5">
-                                  <v-text-field
-                                    dense
-                                    :label="person.email"
-                                    v-model="person.emailValue"
-                                  >
-                                  </v-text-field>
+                                  <v-text-field dense :label="person.email" v-model="person.emailValue"> </v-text-field>
                                 </v-col>
                                 <v-col style="margin-left: 5px" cols="1" lg="1">
                                   <v-row>
-                                    <v-icon large @click="add" color="primary"
-                                      >mdi-plus-circle</v-icon
-                                    >
-                                    <v-icon large @click="remove()" color="red"
-                                      >mdi-minus-circle</v-icon
-                                    >
+                                    <v-icon large @click="add" color="primary">mdi-plus-circle</v-icon>
+                                    <v-icon large @click="remove()" color="red">mdi-minus-circle</v-icon>
                                   </v-row>
                                 </v-col>
                               </v-row>
@@ -120,9 +82,7 @@
                     </v-tab-item>
                   </v-tabs-items>
                   <br /><br />
-                  <v-btn color="primary" @click="xxx()">
-                    Add People
-                  </v-btn>
+                  <v-btn color="primary" @click="xxx()"> Add People </v-btn>
                 </v-form>
               </template>
             </v-col>
@@ -143,15 +103,9 @@ export default {
         { tab: "Parents", value: "parents" },
         { tab: "Teachers", value: "teachers" },
       ],
-      students: [
-        { stt: 1, name: "Name", nameValue: "", email: "Email", emailValue: "" },
-      ],
-      parents: [
-        { stt: 1, name: "Name", nameValue: "", email: "Email", emailValue: "" },
-      ],
-      teachers: [
-        { stt: 1, name: "Name", nameValue: "", email: "Email", emailValue: "" },
-      ],
+      students: [{ stt: 1, name: "Name", nameValue: "", email: "Email", emailValue: "" }],
+      parents: [{ stt: 1, name: "Name", nameValue: "", email: "Email", emailValue: "" }],
+      teachers: [{ stt: 1, name: "Name", nameValue: "", email: "Email", emailValue: "" }],
     };
   },
   methods: {

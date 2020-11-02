@@ -2,13 +2,10 @@
   <v-row>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <v-card>
-        <v-toolbar dark color="primary" style="height: 80px;">
-          <v-toolbar-title
-            style="margin-left: 230px; margin-top: 18px; font-size: 25px"
-            >File details</v-toolbar-title
-          >
+        <v-toolbar dark color="primary" style="height: 80px">
+          <v-toolbar-title style="margin-left: 230px; margin-top: 18px; font-size: 25px">File details</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon @click="dialog = false" style="margin-top: 18px;">
+          <v-btn icon @click="dialog = false" style="margin-top: 18px">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -24,12 +21,7 @@
               </v-list-item>
             </v-col>
             <v-col lg="2">
-              <v-btn
-                color="blue lighten-1"
-                style="color: white; margin-top: 12px;"
-              >
-                View
-              </v-btn>
+              <v-btn color="blue lighten-1" style="color: white; margin-top: 12px"> View </v-btn>
             </v-col>
           </v-row>
           <v-divider></v-divider>
@@ -38,9 +30,7 @@
               <v-row>
                 <v-list-item two-line>
                   <v-list-item-content>
-                    <v-list-item-subtitle
-                      v-text="item.title"
-                    ></v-list-item-subtitle>
+                    <v-list-item-subtitle v-text="item.title"></v-list-item-subtitle>
                     <span v-text="item.value"></span>
                   </v-list-item-content>
                 </v-list-item>

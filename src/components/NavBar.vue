@@ -4,18 +4,11 @@
       <v-toolbar-title class="header-branch"></v-toolbar-title>
     </router-link>
     <v-spacer></v-spacer>
-    <v-btn
-      :key="link.name"
-      v-for="link in links"
-      @click="navigateTo(link.path)"
-      text
-      height="100%"
-      >{{ link.name }}</v-btn
-    >
+    <v-btn :key="link.name" v-for="link in links" @click="navigateTo(link.path)" text height="100%">{{
+      link.name
+    }}</v-btn>
     <v-btn text height="100%" @click="switchTheme"
-      ><v-icon>{{
-        $vuetify.theme.dark ? "mdi-brightness-4" : "mdi-brightness-6"
-      }}</v-icon></v-btn
+      ><v-icon>{{ $vuetify.theme.dark ? "mdi-brightness-4" : "mdi-brightness-6" }}</v-icon></v-btn
     >
   </v-app-bar>
 </template>

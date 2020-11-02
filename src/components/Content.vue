@@ -15,11 +15,7 @@
     <add-people></add-people>
     <template v-slot:extension>
       <v-tabs align-with-title color="#2196f3">
-        <v-tab
-          v-for="tab in tabs"
-          :key="tab.name"
-          @click="$router.push({ name: tab.routeName })"
-        >
+        <v-tab v-for="tab in tabs" :key="tab.name" @click="$router.push({ name: tab.routeName })">
           {{ tab.name }}
         </v-tab>
       </v-tabs>

@@ -1,5 +1,5 @@
 <template>
-  <v-container class=" mx-0 ml-5">
+  <v-container class="mx-0 ml-5">
     <v-card class="pa-4" elevation="1">
       <v-card-title> Class information </v-card-title>
       <v-card-text>
@@ -28,9 +28,7 @@
         </v-row>
       </v-card-text>
       <v-card-actions style="margin-top: -35px" class="ml-2 mb-6">
-        <v-btn type="submit" color="primary" @click.prevent="changeClassInfo">
-          Save
-        </v-btn>
+        <v-btn type="submit" color="primary" @click.prevent="changeClassInfo"> Save </v-btn>
       </v-card-actions>
     </v-card>
     <v-card class="mt-3 pa-4" elevation="1">
@@ -69,9 +67,7 @@
         </v-list-item>
       </v-list>
       <a class="addOwner">
-        <v-icon color="blue lighten-1" style="margin-bottom: 3px;">
-          mdi-plus-circle-outline
-        </v-icon>
+        <v-icon color="blue lighten-1" style="margin-bottom: 3px"> mdi-plus-circle-outline </v-icon>
         Add class owner
       </a>
       <br /><br />

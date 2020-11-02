@@ -3,16 +3,13 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
         <a v-bind="attrs" v-on="on" class="createClass">
-          <v-icon class="iconAdd">
-            mdi-plus-circle-outline
-          </v-icon>
+          <v-icon class="iconAdd"> mdi-plus-circle-outline </v-icon>
           Create a class
         </a>
       </template>
       <v-card>
-        <v-toolbar dark color="primary" style="height: 80px;">
-          <v-toolbar-title
-            style="margin-left: 200px; margin-top: 20px; font-size: 25px"
+        <v-toolbar dark color="primary" style="height: 80px">
+          <v-toolbar-title style="margin-left: 200px; margin-top: 20px; font-size: 25px"
             >Create a class</v-toolbar-title
           >
           <v-spacer></v-spacer>
@@ -24,18 +21,9 @@
               <v-col>
                 <v-container style="margin-top: 40px">
                   <v-avatar size="96" class="mr-4">
-                    <img
-                      :src="
-                        '/assets/class_avatar/' + avatar.toLowerCase() + '.svg'
-                      "
-                      alt="Avatar"
-                    />
+                    <img :src="'/assets/class_avatar/' + avatar.toLowerCase() + '.svg'" alt="Avatar" />
                   </v-avatar>
-                  <a
-                    style="color: #2196f3; font-size: 16px"
-                    @click="openAvatarPicker"
-                    >Change icon</a
-                  >
+                  <a style="color: #2196f3; font-size: 16px" @click="openAvatarPicker">Change icon</a>
                 </v-container>
               </v-col>
               <v-col>
@@ -51,19 +39,11 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="dialog = false">
-            Close
-          </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false">
-            Save
-          </v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
+          <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
         </v-card-actions>
       </v-card> </v-dialog
-    ><icon-picker
-      v-model="showAvatarPicker"
-      :current-avatar="avatar"
-      @selected="selectAvatar"
-    ></icon-picker>
+    ><icon-picker v-model="showAvatarPicker" :current-avatar="avatar" @selected="selectAvatar"></icon-picker>
   </v-row>
 </template>
 <script>
