@@ -20,7 +20,13 @@
         <br /><br />
         <v-row>
           <v-col sm="6">
-            <v-text-field dense v-model="classname" label="Class name" outlined>
+            <v-text-field
+              dense
+              v-model="classname"
+              label="Class name"
+              outlined
+              style="margin-bottom: -20px; margin-top: -5px"
+            >
             </v-text-field>
           </v-col>
         </v-row>
@@ -37,7 +43,7 @@
           </v-col>
         </v-row>
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions style="margin-top: -35px" class="ml-2 mb-6">
         <v-btn type="submit" color="primary" @click.prevent="changeClassInfo">
           Save
         </v-btn>
@@ -45,13 +51,13 @@
     </v-card>
     <v-card class="mt-3 pa-4" elevation="1">
       <v-card-title>Class settings</v-card-title>
-      <v-card-text>
+      <v-card-text style="margin-top: -15px">
         <v-checkbox
           v-model="requiredToJoin"
           :label="`Require approval to join`"
         ></v-checkbox>
         <h5>Participant messaging</h5>
-        <v-radio-group v-model="participantMess">
+        <v-radio-group v-model="participantMess" class="mt-1">
           <v-radio label="On" value="On"> </v-radio>
           <v-radio label="Role-based" value="Rolebased"> </v-radio>
           <v-radio label="Off" value="Off"> </v-radio>

@@ -1,7 +1,7 @@
 <template>
   <v-container class="mx-0 ml-5">
     <v-card class="pa-4" elevation="1">
-      <v-card-title>Information </v-card-title>
+      <v-card-title style="margin-bottom: -20px">Information </v-card-title>
       <v-list two-line>
         <v-list-item v-for="item in items" :key="item.title">
           <v-row>
@@ -16,8 +16,10 @@
           </v-row>
         </v-list-item>
       </v-list>
+      <v-card-actions></v-card-actions>
     </v-card>
-    <v-card class="pa-4" elevation="1">
+    <v-card class="mt-3 pa-4" elevation="1">
+      <v-card-title></v-card-title>
       <v-btn style="margin-left: 15px" outlined color="error">
         Leave class
       </v-btn>
@@ -25,8 +27,9 @@
         >You will no longer receive announcements from Web
         Development.</v-subheader
       >
+      <v-card-actions></v-card-actions>
     </v-card>
-    <v-card class="pa-4" elevation="1">
+    <v-card class="mt-3 pa-4" elevation="1">
       <v-list max-width="500px">
         <v-card-title>Class owners</v-card-title>
         <v-card-subtitle
@@ -56,6 +59,7 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
+      <v-card-actions></v-card-actions>
     </v-card>
   </v-container>
 </template>
