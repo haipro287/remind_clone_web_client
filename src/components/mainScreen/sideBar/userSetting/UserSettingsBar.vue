@@ -1,25 +1,10 @@
 <template>
-  <v-card height="100%" width="300" class="settingSide">
-    <v-navigation-drawer
-      absolute
-      dark
-      src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg"
-      width="100%"
-      left
-      permanent
-    >
+  <v-card height="100%" width="250" class="settingSide">
+    <v-navigation-drawer absolute width="100%" left permanent>
       <v-list>
-        <v-list-item>
-          <v-list-item-icon>
-            <v-icon>mdi-arrow-left</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title><h3>BACK</h3></v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
         <v-list-item v-for="(item, i) in items" :key="i" link @click="$router.push({ path: item.link })">
           <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon color="blue lighten-1">{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -36,6 +21,11 @@ export default {
   data() {
     return {
       items: [
+        {
+          icon: "mdi-arrow-left",
+          text: "Back",
+          link: "/classes",
+        },
         {
           icon: "mdi-account",
           text: "Profile",
@@ -74,11 +64,7 @@ export default {
       ],
     };
   },
-  methods: {
-    backToHome() {
-      console.log("BacktoHome");
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped>

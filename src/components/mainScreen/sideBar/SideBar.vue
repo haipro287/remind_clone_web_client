@@ -21,7 +21,7 @@
 
                 <v-list dense>
                   <v-list-item-group v-model="selectedOption" color="primary">
-                    <v-list-item v-for="item in items" :key="item.title" :href="'/classes'">
+                    <v-list-item v-for="item in items" :key="item.title" :href="'/settings'">
                       <v-list-item-icon style="margin-right: 12px">
                         <v-icon>{{ item.icon }}</v-icon>
                       </v-list-item-icon>

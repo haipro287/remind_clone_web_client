@@ -1,6 +1,7 @@
 import About from "./views/About.vue";
 import Login from "./views/LoginScreen.vue";
 import Classes from "./views/MainScreen.vue";
+import SettingsUserLayout from "@/router/layouts/SettingsUserLayout";
 
 export default [
   {
@@ -20,7 +21,7 @@ export default [
   },
   {
     path: "/classes",
-    redirect: "/classes/0",
+    redirect: "/classes/1ve423d", // 1ve423d => default code of first class
   },
   {
     path: "/classes/:code",
@@ -34,7 +35,7 @@ export default [
         path: "message",
         alias: [""],
         name: "Message",
-        component: () => import("./views/MessageScreen.vue"), //thay bang Message
+        component: () => import("./views/MessageScreen.vue"),
       },
       {
         path: "files",
@@ -62,5 +63,34 @@ export default [
     path: "*",
     name: "Coming soon",
     component: () => import("./views/comingSoon.vue"),
+  },
+  {
+    path: "/settings",
+    redirect: "/settings/profile",
+  },
+  {
+    path: "/settings",
+    name: "SettingsUserLayout",
+    component: SettingsUserLayout,
+    meta: {
+      requiresAuth: true,
+    },
+    children: [
+      {
+        path: "profile",
+        name: "SettingsProfileScreen",
+        component: () => import("./views/SettingsProfileScreen.vue"),
+      },
+      {
+        path: "message",
+        name: "SettingsMessage",
+        component: () => import("./views/SettingsMessageScreen.vue"),
+      },
+      {
+        path: "notifications",
+        name: "SettingsNotification",
+        component: () => import("./views/SettingsNotificationScreen.vue"),
+      },
+    ],
   },
 ];
