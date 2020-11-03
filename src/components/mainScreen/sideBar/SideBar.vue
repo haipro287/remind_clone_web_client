@@ -82,8 +82,8 @@
 </template>
 
 <script>
-import CreateClass from "./CreateClass.vue";
-import JoinClass from "./JoinClass.vue";
+import CreateClass from "@/components/mainScreen/sideBar/createClass/CreateClass";
+import JoinClass from "@/components/mainScreen/sideBar/joinClass/JoinClass";
 export default {
   name: "SideBar",
   components: { CreateClass, JoinClass },

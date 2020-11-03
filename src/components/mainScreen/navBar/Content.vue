@@ -24,9 +24,9 @@
 </template>
 
 <script>
-import AddPeople from "./AddPeople.vue";
+import AddPeople from "@/components/mainScreen/navBar/AddPeople";
 export default {
-  name: "Content",
+  name: "NavBar",
   components: { AddPeople },
   data() {
     return {

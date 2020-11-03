@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import FileDetails from "@/components/FileDetails";
+import FileDetails from "@/components/fileScreen/FileDetails";
 export default {
   components: { FileDetails },
   data() {

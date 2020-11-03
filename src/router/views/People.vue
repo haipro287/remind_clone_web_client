@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PersonDetail from "@/components/PersonDetail";
+import PersonDetail from "@/components/peopleScreen/PersonDetail";
 export default {
   components: { PersonDetail },
   data() {

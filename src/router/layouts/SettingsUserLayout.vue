@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import UserSettingsBar from "../../components/UserSettingsBar.vue";
+import UserSettingsBar from "../../components/mainScreen/sideBar/userSetting/UserSettingsBar.vue";
 export default {
   name: "SettingUserLayout",
   components: {

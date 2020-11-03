@@ -43,7 +43,7 @@ export default {
   computed: {
     avatars() {
       let avatars = {};
-      let files = require.context("../../public/assets/class_avatar", true, /\.svg$/i);
+      let files = require.context("../../../../../public/assets/class_avatar", true, /\.svg$/i);
       files.keys().map(key => {
         let id = key
           .split("/")

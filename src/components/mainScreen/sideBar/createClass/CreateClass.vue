@@ -47,7 +47,7 @@
   </v-row>
 </template>
 <script>
-import IconPicker from "./IconPicker.vue";
+import IconPicker from "@/components/mainScreen/sideBar/createClass/IconPicker";
 export default {
   components: { IconPicker },
   data() {

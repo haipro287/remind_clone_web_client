@@ -90,7 +90,7 @@
   </v-container>
 </template>
 <script>
-import IconPicker from "@/components/IconPicker";
+import IconPicker from "@/components/mainScreen/sideBar/createClass/IconPicker";
 export default {
   components: { IconPicker },
   name: "SettingsClass",
