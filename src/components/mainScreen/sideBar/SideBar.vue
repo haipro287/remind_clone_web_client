@@ -1,12 +1,12 @@
 <template>
   <v-navigation-drawer permanent left app class="sidebar">
     <template v-slot:prepend>
-      <v-list-item two-line style="padding-top: 15px">
+      <v-list-item two-line style="padding-top: 15px;">
         <v-list-item-avatar class="avatar">
           <v-img src="https://randomuser.me/api/portraits/women/81.jpg" alt="avatar"></v-img>
         </v-list-item-avatar>
 
-        <v-list-item-content style="margin-left: -3%">
+        <v-list-item-content style="margin-left: -20px">
           <v-list-item-title>
             <div>
               <v-menu offset-y>
@@ -14,7 +14,10 @@
                   <v-list-item two-line>
                     <v-list-item-content>
                       <v-list-item-subtitle>Hello,</v-list-item-subtitle>
-                      <v-list-item-title v-bind="attrs" v-on="on"> Pham Thi Dan </v-list-item-title>
+                      <v-list-item-title v-bind="attrs" v-on="on">
+                        Pham Thi Dan
+                        <v-icon>mdi-chevron-down</v-icon>
+                      </v-list-item-title>
                     </v-list-item-content>
                   </v-list-item>
                 </template>
@@ -149,7 +152,7 @@ export default {
 }
 
 .avatar {
-  margin-left: 5%;
+  margin-left: 20px;
 }
 
 .listClass {
