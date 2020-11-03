@@ -1,9 +1,9 @@
 <template>
-  <div class="root">
+  <div>
     <user-settings-bar />
     <v-main>
       <v-container fluid>
-        <slot />
+        <router-view></router-view>
       </v-container>
     </v-main>
   </div>
@@ -11,15 +11,10 @@
 <script>
 import UserSettingsBar from "../../components/mainScreen/sideBar/userSetting/UserSettingsBar.vue";
 export default {
-  name: "SettingUserLayout",
+  name: "SettingsUserLayout",
   components: {
     UserSettingsBar,
   },
 };
 </script>
-<style scoped>
-.root {
-  width: 100%;
-  height: 100%;
-}
-</style>
+<style scoped></style>

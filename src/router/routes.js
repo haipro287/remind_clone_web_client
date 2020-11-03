@@ -1,7 +1,6 @@
 import About from "./views/About.vue";
 import Login from "./views/LoginScreen.vue";
 import Classes from "./views/MainScreen.vue";
-import SettingsUserLayout from "@/router/layouts/SettingsUserLayout";
 
 export default [
   {
@@ -70,8 +69,9 @@ export default [
   },
   {
     path: "/settings",
-    name: "SettingsUserLayout",
-    component: SettingsUserLayout,
+    alias: ["/settings/profile"],
+    name: "SettingsAccountScreen",
+    component: () => import("./views/SettingsAccountScreen.vue"),
     meta: {
       requiresAuth: true,
     },
