@@ -1,7 +1,7 @@
 <template>
-  <base-line class="background">
-    <div class="container">
-      <img src="/assets/login.jpg" class="loginImg" />
+  <base-line class="background login-bg">
+    <v-card class="container">
+      <img src="/assets/login.png" class="loginImg" />
       <div class="formContainer">
         <h1 class="titleSignin">Sign In</h1>
         <v-form @submit="login()">
@@ -27,14 +27,19 @@
           <v-checkbox v-model="keepsignin" :label="`Stay logged in`"> </v-checkbox>
           <v-btn block elevation="4" color="primary" @click="login()"> Log in </v-btn>
           <p class="orDivider"> OR </p>
-          <v-btn block elevation="4"> Sign in with google </v-btn>
+          <v-btn block elevation="4" max-width="370px">
+            <v-avatar size="3%" class="mr-3">
+              <v-img src="/assets/logoGG.png"> </v-img>
+            </v-avatar>
+            Sign in with google
+          </v-btn>
           <p class="orDivider">
             Don't have an account?
             <a ref=""> Sign up!</a>
           </p>
         </v-form>
       </div>
-    </div>
+    </v-card>
   </base-line>
 </template>
 
@@ -72,7 +77,6 @@ export default {
 
 <style scoped>
 .background {
-  background-color: gainsboro;
   height: 100%;
 }
 .container {

@@ -2,10 +2,13 @@
   <v-row>
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on, attrs }">
-        <a v-bind="attrs" v-on="on" class="joinClass">
-          <v-icon class="iconAdd"> mdi-plus-circle-outline </v-icon>
-          Join a class
-        </a>
+        <v-hover v-slot="{ hover }">
+          <a v-bind="attrs" v-on="on" class="joinClass">
+            <v-icon v-if="!hover" class="iconAdd"> mdi-plus-circle-outline </v-icon>
+            <v-icon v-if="hover" class="iconAdd"> mdi-plus-circle </v-icon>
+            Join a class
+          </a>
+        </v-hover>
       </template>
       <v-card>
         <v-toolbar dark color="primary" style="height: 80px">

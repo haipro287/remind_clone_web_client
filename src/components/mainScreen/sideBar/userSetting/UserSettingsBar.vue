@@ -1,6 +1,6 @@
 <template>
   <v-card height="100%" width="250" class="settingSide">
-    <v-navigation-drawer absolute width="100%" left permanent>
+    <v-navigation-drawer absolute width="100%" left permanent class="sidebar">
       <v-list>
         <v-list-item v-for="(item, i) in items" :key="i" link @click="$router.push({ path: item.link })">
           <v-list-item-icon>
@@ -72,5 +72,9 @@ export default {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
   float: left;
+}
+
+.sidebar {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) inset;
 }
 </style>

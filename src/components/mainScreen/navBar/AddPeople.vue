@@ -38,14 +38,7 @@
                   <v-tabs-items v-model="tab">
                     <v-tab-item v-for="item in items" :key="item.tab">
                       <v-card flat>
-                        <v-app-bar
-                          dense
-                          flat
-                          dark
-                          elevate-on-scroll
-                          color="#F2F3F5"
-                          style="color: black; font-weight: bold; margn-bottom: 10px"
-                        >
+                        <v-app-bar dense flat elevate-on-scroll style="font-weight: bold; margn-bottom: 10px">
                           <v-row>
                             <v-col class="sttHeader" cols="1" lg="1"> STT </v-col>
                             <v-col cols="5" lg="5"> Name </v-col>

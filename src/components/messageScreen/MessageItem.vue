@@ -5,7 +5,7 @@
     </v-avatar>
     <div class="d-flex flex-column width-100 ml-2">
       <h4>{{ message.sender.name }}</h4>
-      <div class="message-item-body pa-3 rounded-t-lg rounded-r-lg">
+      <div class="message-item-body pa-3 rounded-t-lg rounded-r-lg message-item">
         <p class="mb-0">{{ message.message.richText || message.message.text }}</p>
         <span id="message-item-body-timestamp">{{ message.createdAt }}</span>
       </div>
@@ -39,6 +39,6 @@ export default {
 #message-item-body-timestamp {
   float: right;
   font-size: 0.7em;
-  color: rgba(0, 0, 0, 0.6);
+  opacity: 0.6;
 }
 </style>

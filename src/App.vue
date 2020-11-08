@@ -7,6 +7,17 @@
 <script>
 export default {
   name: "App",
+  mounted() {
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const savedColorPref = localStorage.getItem("dark");
+
+    if (savedColorPref !== undefined) {
+      this.$vuetify.theme.dark = savedColorPref === "true";
+    } else {
+      this.$vuetify.theme.dark = prefersDarkScheme.matches;
+    }
+  },
 };
 </script>
 

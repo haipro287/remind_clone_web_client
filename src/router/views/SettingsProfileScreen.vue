@@ -104,7 +104,6 @@ export default {
 }
 .usernameCSS >>> h1 {
   text-align: center;
-  font-family: "Lobster", cursive;
 }
 .dividerCSS {
   margin-top: 40px;

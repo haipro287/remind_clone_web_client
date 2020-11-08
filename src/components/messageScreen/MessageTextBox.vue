@@ -1,6 +1,16 @@
 <template>
   <div id="container" class="pa-3">
-    <textarea placeholder="Send a message..." class="width-100 pa-2" id="message-text-box-input"></textarea>
+    <v-textarea
+      solo
+      flat
+      name="message-text-box"
+      placeholder="Send a message..."
+      class="width-100"
+      id="message-text-box-input"
+      rows="2"
+      no-resize
+      :background-color="isDark ? undefined : '#f5f5f5'"
+    ></v-textarea>
     <div id="message-text-box-menu" class="d-flex">
       <v-btn icon tile color="primary">
         <v-icon>mdi-file</v-icon>
@@ -12,7 +22,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+  computed: {
+    isDark() {
+      return this.$vuetify.theme.dark;
+    },
+  },
+};
 </script>
 
 <style scope>
@@ -20,12 +36,6 @@ export default {};
   border: 1px solid rgba(30, 30, 30, 0.1);
 }
 
-#message-text-box-input,
-#message-text-box-input:focus {
-  border: 1px solid rgba(30, 30, 30, 0.3);
-  outline: none;
-  resize: none;
-}
 .width-100 {
   width: 100%;
 }

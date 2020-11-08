@@ -38,7 +38,7 @@ export default {
     value: Boolean,
   },
   async mounted() {
-    await this.$store.dispatch("fetchAvatars");
+    // await this.$store.dispatch("fetchAvatars");
   },
   computed: {
     avatars() {

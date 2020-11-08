@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="#0274de" dark>
+  <v-app-bar app color="primary" dark>
     <router-link to="/">
       <v-toolbar-title class="header-branch"></v-toolbar-title>
     </router-link>
