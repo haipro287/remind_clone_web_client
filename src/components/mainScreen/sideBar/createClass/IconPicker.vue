@@ -50,7 +50,6 @@ export default {
           .pop()
           .split(".")[0]
           .toUpperCase();
-        console.log(id);
         avatars[id] = {
           path: key.split("/").pop(),
           id: id,

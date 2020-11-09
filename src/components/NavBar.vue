@@ -40,6 +40,7 @@ export default {
     },
     switchTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      localStorage.setItem("dark", this.$vuetify.theme.dark);
     },
   },
 };

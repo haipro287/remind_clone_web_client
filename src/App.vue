@@ -12,7 +12,7 @@ export default {
 
     const savedColorPref = localStorage.getItem("dark");
 
-    if (savedColorPref !== undefined) {
+    if (savedColorPref !== undefined && savedColorPref !== null) {
       this.$vuetify.theme.dark = savedColorPref === "true";
     } else {
       this.$vuetify.theme.dark = prefersDarkScheme.matches;
