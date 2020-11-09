@@ -49,34 +49,34 @@
         <v-subheader>Classes Owned</v-subheader>
         <create-class></create-class>
         <v-list-item
-          v-for="item in classes_owned"
-          :key="item.title"
+          v-for="item in ownedClassrooms"
+          :key="item.id"
           :to="'/classes/' + item.code"
           style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">
-            <v-img :src="item.avatar"></v-img>
+            <v-img src="/assets/class_avatar/geometry.svg"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
         <v-subheader>Classes Joined</v-subheader>
         <join-class></join-class>
         <v-list-item
-          v-for="item in classes_joined"
-          :key="item.title"
+          v-for="item in joinedClassrooms"
+          :key="item.id"
           :to="'/classes/' + item.code"
           style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">
-            <v-img :src="item.avatar"></v-img>
+            <v-img src="/assets/class_avatar/geometry.svg"></v-img>
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list-item-group>
@@ -87,6 +87,8 @@
 <script>
 import CreateClass from "@/components/mainScreen/sideBar/createClass/CreateClass";
 import JoinClass from "@/components/mainScreen/sideBar/joinClass/JoinClass";
+import { mapGetters } from "vuex";
+
 export default {
   name: "SideBar",
   components: { CreateClass, JoinClass },
@@ -132,40 +134,13 @@ export default {
         },
       ],
       selectedClass: 0,
-      classes_owned: [
-        {
-          title: "Class 1",
-          code: "1ve423d",
-          avatar: "/assets/class_avatar/apple.svg",
-          id: 1,
-        },
-        {
-          title: "Class 2",
-          code: "454kgf4",
-          avatar: "/assets/class_avatar/art.svg",
-          id: 2,
-        },
-      ],
-      classes_joined: [
-        {
-          title: "Class 3",
-          code: "45g4trg",
-          avatar: "/assets/class_avatar/geography.svg",
-          id: 3,
-        },
-        {
-          title: "Class 4",
-          code: "34gf45b",
-          avatar: "/assets/class_avatar/geometry.svg",
-          id: 4,
-        },
-      ],
     };
   },
   computed: {
     isDark() {
       return this.$vuetify.theme.dark;
     },
+    ...mapGetters(["joinedClassrooms", "ownedClassrooms"]),
   },
 };
 </script>

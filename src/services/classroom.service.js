@@ -1,9 +1,5 @@
-const axios = require("./axios");
+import axios from "./axios";
 
-exports.getClassrooms = token => {
-  return axios.get("/api/classroom", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
+export function getClassrooms() {
+  return axios.get("/api/classroom");
+}

@@ -1,8 +1,8 @@
-const axios = require("axios");
-const { serverAPI: api } = require("@/utils/constants");
-const { default: store } = require("../store");
-const { AUTH_LOGOUT } = require("../store/actions/auth");
-const { default: router } = require("../router");
+import axios from "axios";
+import { serverAPI as api } from "@/utils/constants";
+import store from "../store";
+import { AUTH_LOGOUT } from "../store/actions/auth";
+import router from "../router";
 
 const instance = axios.create({
   baseURL: api.BASE_URL,
@@ -24,4 +24,4 @@ instance.interceptors.response.use(
   }
 );
 
-module.exports = instance;
+export default instance;
