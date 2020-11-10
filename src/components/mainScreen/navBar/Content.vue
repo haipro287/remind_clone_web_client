@@ -6,7 +6,7 @@
           <v-img src="/assets/class_avatar/apple.svg"> </v-img>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title class="className">Class 1</v-list-item-title>
+          <v-list-item-title class="className">{{ currentClassroom.name }}</v-list-item-title>
           <v-list-item-subtitle>@{{ $route.params.code }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -25,6 +25,8 @@
 
 <script>
 import AddPeople from "@/components/mainScreen/navBar/AddPeople";
+import { mapState } from "vuex";
+
 export default {
   name: "NavBar",
   components: { AddPeople },
@@ -38,6 +40,11 @@ export default {
         { name: "Setting", routeName: "Settings Class" },
       ],
     };
+  },
+  computed: {
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+    }),
   },
 };
 </script>

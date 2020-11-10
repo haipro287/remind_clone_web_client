@@ -1,6 +1,7 @@
 import About from "./views/About.vue";
 import Login from "./views/LoginScreen.vue";
 import Classes from "./views/MainScreen.vue";
+import store from "../store";
 
 export default [
   {
@@ -29,11 +30,21 @@ export default [
     meta: {
       requiresAuth: true,
     },
+    beforeEnter(to, from, next) {
+      store
+        .dispatch("FETCH_CLASSES")
+        .then(() => {
+          next();
+        })
+        .catch(() => {
+          next(false);
+        });
+    },
     children: [
       {
         path: "message",
-        alias: [""],
         name: "Message",
+        alias: [""],
         component: () => import("./views/MessageScreen.vue"),
       },
       {

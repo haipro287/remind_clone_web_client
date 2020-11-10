@@ -1,8 +1,8 @@
 <template>
   <v-container fluid class="d-flex pa-0">
     <div class="fit-v-viewport pr-1 col-3" id="conversation-list">
-      <v-list v-for="convo in conversationList" :key="convo.id">
-        <conversation-item :convoName="convo.convoName" :avatarUrl="convo.avatarUrl" />
+      <v-list v-for="convo in currentClassConvos" :key="convo.id">
+        <conversation-item :convoName="convo.conversation_name" :avatarUrl="convo.avatarUrl" />
       </v-list>
     </div>
     <div class="d-flex flex-column width-100 fit-v-viewport">
@@ -16,7 +16,7 @@
         <message-list-date date="October 20, 2020" />
         <message-item v-for="message in messageList" :key="message.id" :message="message" />
       </div>
-      <message-text-box />
+      <message-text-box @submit="onSendMessage" />
     </div>
   </v-container>
 </template>
@@ -26,7 +26,7 @@ import MessageItem from "@/components/messageScreen/MessageItem.vue";
 import MessageTextBox from "@/components/messageScreen/MessageTextBox.vue";
 import ConversationItem from "@/components/messageScreen/ConversationItem.vue";
 import MessageListDate from "@/components/messageScreen/MessageListDate.vue";
-
+import { mapGetters, mapState } from "vuex";
 export default {
   components: {
     MessageItem,
@@ -109,34 +109,26 @@ export default {
           createdAt: "10:18 AM",
         },
       ],
-      conversationList: [
-        {
-          id: 1,
-          avatarUrl: "https://randomuser.me/api/portraits/women/27.jpg",
-          convoName: "Annie Edison",
-        },
-        {
-          id: 2,
-          avatarUrl: "https://randomuser.me/api/portraits/women/28.jpg",
-          convoName: "Mary Anderson",
-        },
-        {
-          id: 3,
-          avatarUrl: "https://randomuser.me/api/portraits/women/29.jpg",
-          convoName: "Beth Smith",
-        },
-        {
-          id: 4,
-          avatarUrl: "https://randomuser.me/api/portraits/women/21.jpg",
-          convoName: "Vanessa Vaugn",
-        },
-        {
-          id: 5,
-          avatarUrl: "https://randomuser.me/api/portraits/women/22.jpg",
-          convoName: "Emily",
-        },
-      ],
     };
+  },
+  watch: {
+    $route: "fetchData",
+  },
+  methods: {
+    fetchData() {
+      const currentClassroomId = this.$store.state.Classroom.currentClassroom.id;
+      this.$store.dispatch("FETCH_CLASS_CONVOS", currentClassroomId).then(() => {
+        console.log(this.currentClassConvos);
+      });
+    },
+    onSendMessage() {},
+  },
+  computed: {
+    ...mapGetters(["currentClassConvos"]),
+    ...mapState(["currentClassroom"]),
+  },
+  created() {
+    this.fetchData();
   },
 };
 </script>

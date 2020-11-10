@@ -1,16 +1,16 @@
-const axios = require("./axios");
+import axios from "./axios";
 
 const GET_CONVERSATION = "/api/user/conversations";
 
-exports.getConversations = (token, classroomId) => {
+/**
+ * Get conversations in {classroomId}
+ * @protected
+ * @param {int} classroomId
+ */
+export function getConversations(classroomId) {
   return axios.get(GET_CONVERSATION, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
     params: {
       classroomId,
     },
   });
-};
-
-// exports.getMessageList = (token, conversationId) => {};
+}
