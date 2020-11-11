@@ -1,12 +1,22 @@
 <template>
-  <classline> </classline>
+  <div>
+    <side-bar />
+    <nav-bar />
+    <v-main>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-main>
+  </div>
 </template>
 
 <script>
-import Classline from "../layouts/Classline.vue";
+import SideBar from "@/components/mainScreen/sideBar/SideBar.vue";
+import NavBar from "@/components/mainScreen/navBar/Content.vue";
+import { mapState } from "vuex";
 
 export default {
-  components: { Classline },
+  components: { SideBar, NavBar },
   methods: {
     async fetchData() {
       const currentClassCode = this.$route.params.code;
@@ -32,6 +42,11 @@ export default {
   },
   created() {
     this.fetchData();
+  },
+  computed: {
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+    }),
   },
 };
 </script>

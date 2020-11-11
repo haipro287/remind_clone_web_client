@@ -21,7 +21,30 @@ export default [
   },
   {
     path: "/classes",
-    redirect: "/classes/1ve423d", // 1ve423d => default code of first class
+    beforeEnter(to, from, next) {
+      store
+        .dispatch("FETCH_CLASSES")
+        .then(() => {
+          const firstClass = Object.values(store.state.Classroom.classrooms)[0];
+          // console.log(firstClass);
+          if (firstClass) {
+            next({
+              name: "Message",
+              params: {
+                code: firstClass.code,
+              },
+            });
+          } else {
+            next({ name: "About" });
+          }
+        })
+        .catch(() => {
+          next(false);
+        });
+    },
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/classes/:code",

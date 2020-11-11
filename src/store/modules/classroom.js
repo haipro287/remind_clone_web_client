@@ -58,5 +58,8 @@ export default {
     ownedClassrooms: state => {
       return Object.values(state.classrooms).filter(classroom => classroom.classType === "owned");
     },
+    haveNoClass: state => {
+      return Object.keys(state.classrooms).length === 0;
+    },
   },
 };
