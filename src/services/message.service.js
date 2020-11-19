@@ -1,6 +1,7 @@
 import axios from "./axios";
 
 const GET_CONVERSATION = "/api/user/conversations";
+const GET_MESSAGE = "/api/message";
 
 /**
  * Get conversations in {classroomId}
@@ -13,4 +14,8 @@ export function getConversations(classroomId) {
       classroomId,
     },
   });
+}
+
+export function getMessages(convoId) {
+  return axios.get(`${GET_MESSAGE}/${convoId}`);
 }

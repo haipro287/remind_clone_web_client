@@ -1,9 +1,9 @@
-import { getConversations } from "@/services/message.service";
+import { getConversations, getMessages } from "@/services/message.service";
 import Vue from "vue";
 
 export default {
   state: () => ({
-    currentConvo: null,
+    currentConvo: {},
     messages: {},
     conversations: {},
   }),
@@ -17,6 +17,13 @@ export default {
     SET_CLASS_CONVOS(state, { classroomId, convos }) {
       Vue.set(state.conversations, classroomId, convos);
     },
+    SET_CONVO_MESSAGES(state, { convoId, messages }) {
+      Vue.set(state.messages, convoId, messages);
+    },
+    CHANGE_CURRENT_CONVO(state, { convoId, classroomId }) {
+      let listConvos = state.conversations[classroomId];
+      state.currentConvo = listConvos.find(convo => convo.id === convoId);
+    },
   },
   actions: {
     /**
@@ -24,15 +31,9 @@ export default {
      * @param {int} classroomId
      */
     FETCH_CLASS_CONVOS({ commit, state }, classroomId) {
-      // return getConversations(classroomId)
-      //   .then(res => res.data)
-      //   .then(data => {
-      //     const convos = data.data;
-      //     commit("SET_CLASS_CONVOS", { classroomId, convos });
-      //   });
       return new Promise((resolve, reject) => {
         if (state.conversations[classroomId]) {
-          resolve(state.conversations[classroomId]);
+          return resolve(state.conversations[classroomId]);
         }
         getConversations(classroomId)
           .then(res => res.data)
@@ -44,6 +45,25 @@ export default {
           .catch(reject);
       });
     },
+    FETCH_CONVO_MESSAGES({ state, commit }, convoId) {
+      return new Promise((resolve, reject) => {
+        if (state.messages[convoId]) {
+          return resolve(state.messages[convoId]);
+        }
+        getMessages(convoId)
+          .then(res => res.data)
+          .then(data => {
+            const messages = data.data;
+            commit("SET_CONVO_MESSAGES", { convoId, messages });
+            resolve(messages);
+          })
+          .catch(reject);
+      });
+    },
+    CHANGE_CURRENT_CONVO({ commit, rootState }, convoId) {
+      const currentClassroom = rootState.Classroom.currentClassroom;
+      commit("CHANGE_CURRENT_CONVO", { convoId, classroomId: currentClassroom.id });
+    },
   },
   getters: {
     currentClassConvos: (state, getters, rootState) => {
@@ -53,6 +73,13 @@ export default {
       }
 
       return [];
+    },
+    currentConvoMessages: state => {
+      if (!state.currentConvo || Object.keys(state.currentConvo).length === 0) return [];
+
+      const currentConvoMessages = state.messages[state.currentConvo.id];
+
+      return currentConvoMessages;
     },
   },
 };

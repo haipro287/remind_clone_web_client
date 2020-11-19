@@ -1,20 +1,21 @@
 <template>
   <v-container fluid class="d-flex pa-0">
     <div class="fit-v-viewport pr-1 col-3" id="conversation-list">
+      <create-new-message-dialog />
       <v-list v-for="convo in currentClassConvos" :key="convo.id">
-        <conversation-item :convoName="convo.conversation_name" :avatarUrl="convo.avatarUrl" />
+        <conversation-item @click="onChangeConvo" :convoObj="convo" :avatarUrl="convo.avatarUrl" />
       </v-list>
     </div>
     <div class="d-flex flex-column width-100 fit-v-viewport">
       <div id="conversation-app-bar" class="pa-5 d-flex align-center justify-space-between">
-        <h3>Annie Edison</h3>
+        <h3>{{ currentConvo.conversation_name }}</h3>
         <v-btn icon>
           <v-icon>mdi-alert-circle-outline</v-icon>
         </v-btn>
       </div>
       <div id="message-list-item" class="fill-height">
         <message-list-date date="October 20, 2020" />
-        <message-item v-for="message in messageList" :key="message.id" :message="message" />
+        <message-item v-for="message in currentConvoMessages" :key="message.id" :message="message" />
       </div>
       <message-text-box @submit="onSendMessage" />
     </div>
@@ -26,106 +27,61 @@ import MessageItem from "@/components/messageScreen/MessageItem.vue";
 import MessageTextBox from "@/components/messageScreen/MessageTextBox.vue";
 import ConversationItem from "@/components/messageScreen/ConversationItem.vue";
 import MessageListDate from "@/components/messageScreen/MessageListDate.vue";
+import CreateNewMessageDialog from "../../components/messageScreen/createNewMessageDialog.vue";
 import { mapGetters, mapState } from "vuex";
+
 export default {
+  name: "MessageScreen",
+  sockets: {
+    connect: function() {
+      console.log("connected");
+    },
+    echo: function(msg) {
+      console.log(msg);
+    },
+  },
   components: {
     MessageItem,
     MessageTextBox,
     ConversationItem,
     MessageListDate,
+    CreateNewMessageDialog,
   },
   data() {
     return {
-      messageList: [
-        {
-          id: 1,
-          sender: {
-            id: 1,
-            name: "Annie Edison",
-          },
-          conversationId: 1,
-          message: {
-            richText: "Hello from the other side.",
-            text: "Hello from the other side.",
-          },
-          createdAt: "10:12 AM",
-        },
-        {
-          id: 2,
-          sender: {
-            id: 1,
-            name: "Annie Edison",
-          },
-          conversationId: 1,
-          message: {
-            richText:
-              "Will justice philosophy madness passion victorious justice depths aversion abstract selfish enlightenment hatred. Truth ascetic salvation value victorious merciful marvelous truth holiest value hatred derive. Holiest transvaluation derive self hope evil fearful ideal merciful. Strong ultimate disgust christianity zarathustra christian disgust inexpedient inexpedient. Overcome enlightenment sea sexuality fearful depths hope pious eternal-return salvation.",
-            text:
-              "Will justice philosophy madness passion victorious justice depths aversion abstract selfish enlightenment hatred. Truth ascetic salvation value victorious merciful marvelous truth holiest value hatred derive. Holiest transvaluation derive self hope evil fearful ideal merciful. Strong ultimate disgust christianity zarathustra christian disgust inexpedient inexpedient. Overcome enlightenment sea sexuality fearful depths hope pious eternal-return salvation.",
-          },
-          createdAt: "10:18 AM",
-        },
-        {
-          id: 3,
-          sender: {
-            id: 1,
-            name: "Annie Edison",
-          },
-          conversationId: 1,
-          message: {
-            richText: "Someone like you. Someone who'll rattle the cages. Does it come in black?",
-            text: "Someone like you. Someone who'll rattle the cages. Does it come in black?",
-          },
-          createdAt: "10:18 AM",
-        },
-        {
-          id: 4,
-          sender: {
-            id: 1,
-            name: "Annie Edison",
-          },
-          conversationId: 1,
-          message: {
-            richText:
-              " Swear to me! My anger outweights my guilt. It's not who I am underneath but what I do that defines me. I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.",
-            text:
-              " Swear to me! My anger outweights my guilt. It's not who I am underneath but what I do that defines me. I can't do that as Bruce Wayne... as a man. I'm flesh and blood. I can be ignored, destroyed. But as a symbol, I can be incorruptible, I can be everlasting.",
-          },
-          createdAt: "10:18 AM",
-        },
-        {
-          id: 5,
-          sender: {
-            id: 1,
-            name: "Annie Edison",
-          },
-          conversationId: 1,
-          message: {
-            richText:
-              " Does it come in black? This isn't a car. Well, you see... I'm buying this hotel and setting some new rules about the pool area.",
-            text:
-              " Does it come in black? This isn't a car. Well, you see... I'm buying this hotel and setting some new rules about the pool area. ",
-          },
-          createdAt: "10:18 AM",
-        },
-      ],
+      messageList: [],
     };
   },
   watch: {
     $route: "fetchData",
   },
   methods: {
-    fetchData() {
+    async fetchData() {
       const currentClassroomId = this.$store.state.Classroom.currentClassroom.id;
-      this.$store.dispatch("FETCH_CLASS_CONVOS", currentClassroomId).then(() => {
-        console.log(this.currentClassConvos);
+      const currentConvoId = this.$route.params.convoId;
+      await this.$store.dispatch("FETCH_CLASS_CONVOS", currentClassroomId);
+      await this.$store.dispatch("FETCH_CONVO_MESSAGES", currentConvoId);
+    },
+    onSendMessage() {
+      console.log("Sending...");
+      this.$socket.emit("NEW_MESSAGE");
+    },
+    onChangeConvo(convoId) {
+      this.$store.dispatch("CHANGE_CURRENT_CONVO", convoId);
+      this.$router.push({
+        name: "Message",
+        params: {
+          convoId,
+        },
       });
     },
-    onSendMessage() {},
   },
   computed: {
-    ...mapGetters(["currentClassConvos"]),
-    ...mapState(["currentClassroom"]),
+    ...mapGetters(["currentClassConvos", "currentConvoMessages"]),
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+      currentConvo: state => state.Message.currentConvo,
+    }),
   },
   created() {
     this.fetchData();

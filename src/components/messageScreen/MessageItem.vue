@@ -6,7 +6,7 @@
     <div class="d-flex flex-column width-100 ml-2">
       <h4>{{ message.sender.name }}</h4>
       <div class="message-item-body pa-3 rounded-t-lg rounded-r-lg message-item">
-        <p class="mb-0">{{ message.message.richText || message.message.text }}</p>
+        <p class="mb-0">{{ message.message || message.message_text }}</p>
         <span id="message-item-body-timestamp">{{ message.createdAt }}</span>
       </div>
     </div>
@@ -21,6 +21,10 @@ export default {
       type: Object,
       required: true,
     },
+    isMine: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -30,6 +34,10 @@ export default {
   background-color: aliceblue;
   width: 70%;
   max-width: 500px;
+}
+
+.message-item-body.is-mine {
+  align-self: flex-end;
 }
 
 .width-100 {

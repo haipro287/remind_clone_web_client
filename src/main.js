@@ -3,8 +3,17 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
+import VueSocketIO from "vue-socket.io";
+import io from "socket.io-client";
 
 Vue.config.productionTip = false;
+
+Vue.use(
+  new VueSocketIO({
+    debug: true,
+    connection: io("http://localhost:3000"),
+  })
+);
 
 new Vue({
   router,
