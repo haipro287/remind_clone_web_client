@@ -1,6 +1,7 @@
 <template>
   <div id="container" class="pa-3">
     <v-textarea
+      v-model="newMessage"
       solo
       flat
       name="message-text-box"
@@ -10,13 +11,14 @@
       rows="2"
       no-resize
       :background-color="isDark ? undefined : '#f5f5f5'"
+      @keydown.enter.exact.prevent="onSend"
     ></v-textarea>
     <div id="message-text-box-menu" class="d-flex">
       <v-btn icon tile color="primary">
         <v-icon>mdi-file</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn text color="primary">Send</v-btn>
+      <v-btn text color="primary" @click="onSend">Send</v-btn>
     </div>
   </div>
 </template>
@@ -26,6 +28,17 @@ export default {
   computed: {
     isDark() {
       return this.$vuetify.theme.dark;
+    },
+  },
+  data() {
+    return {
+      newMessage: "",
+    };
+  },
+  methods: {
+    onSend() {
+      this.$emit("submit", this.newMessage);
+      this.newMessage = "";
     },
   },
 };

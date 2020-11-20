@@ -1,6 +1,7 @@
 import About from "./views/About.vue";
 import Login from "./views/LoginScreen.vue";
 import Classes from "./views/MainScreen.vue";
+import store from "../store";
 
 export default [
   {
@@ -20,7 +21,30 @@ export default [
   },
   {
     path: "/classes",
-    redirect: "/classes/1ve423d", // 1ve423d => default code of first class
+    beforeEnter(to, from, next) {
+      store
+        .dispatch("FETCH_CLASSES")
+        .then(() => {
+          const firstClass = Object.values(store.state.Classroom.classrooms)[0];
+          // console.log(firstClass);
+          if (firstClass) {
+            next({
+              name: "Message",
+              params: {
+                code: firstClass.code,
+              },
+            });
+          } else {
+            next({ name: "About" });
+          }
+        })
+        .catch(() => {
+          next(false);
+        });
+    },
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/classes/:code",
@@ -29,10 +53,25 @@ export default [
     meta: {
       requiresAuth: true,
     },
+    beforeEnter(to, from, next) {
+      store
+        .dispatch("FETCH_CLASSES")
+        .then(() => {
+          next();
+        })
+        .catch(() => {
+          next(false);
+        });
+    },
     children: [
       {
         path: "message",
+        name: "MessageStart",
         alias: [""],
+        component: () => import("./views/MessageScreen.vue"),
+      },
+      {
+        path: "message/:convoId",
         name: "Message",
         component: () => import("./views/MessageScreen.vue"),
       },

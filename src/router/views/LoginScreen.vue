@@ -65,6 +65,7 @@ export default {
   methods: {
     login() {
       this.$store.dispatch(AUTH_LOGIN, this.user).then(() => {
+        this.$socket.open();
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect);
         }
