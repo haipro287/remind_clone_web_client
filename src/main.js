@@ -11,7 +11,16 @@ Vue.config.productionTip = false;
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: io("http://localhost:3000"),
+    connection: io("http://localhost:3000/message", {
+      query: {
+        token: store.state.Auth.token,
+      },
+      autoConnect: false,
+    }),
+    vuex: {
+      store,
+      actionPrefix: "SOCKET_MSG_",
+    },
   })
 );
 

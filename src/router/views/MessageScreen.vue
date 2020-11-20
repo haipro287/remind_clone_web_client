@@ -14,8 +14,12 @@
         </v-btn>
       </div>
       <div id="message-list-item" class="fill-height">
-        <message-list-date date="October 20, 2020" />
-        <message-item v-for="message in currentConvoMessages" :key="message.id" :message="message" />
+        <message-item
+          v-for="message in currentConvoMessages"
+          :key="message.id"
+          :message="message"
+          :isMine="message.sender.id === currentUser.id"
+        />
       </div>
       <message-text-box @submit="onSendMessage" />
     </div>
@@ -32,20 +36,18 @@ import { mapGetters, mapState } from "vuex";
 
 export default {
   name: "MessageScreen",
-  sockets: {
-    connect: function() {
-      console.log("connected");
-    },
-    echo: function(msg) {
-      console.log(msg);
-    },
-  },
   components: {
     MessageItem,
     MessageTextBox,
     ConversationItem,
+    // eslint-disable-next-line vue/no-unused-components
     MessageListDate,
     CreateNewMessageDialog,
+  },
+  sockets: {
+    message: function(msg) {
+      console.log(msg);
+    },
   },
   data() {
     return {
@@ -62,9 +64,23 @@ export default {
       await this.$store.dispatch("FETCH_CLASS_CONVOS", currentClassroomId);
       await this.$store.dispatch("FETCH_CONVO_MESSAGES", currentConvoId);
     },
-    onSendMessage() {
-      console.log("Sending...");
-      this.$socket.emit("NEW_MESSAGE");
+    onSendMessage(msg) {
+      console.log(msg);
+      let broadcastMsg = {
+        sender: {
+          id: this.currentUser.id,
+          name: this.currentUser.name,
+        },
+        messageText: msg,
+        createdAt: new Date(),
+        conversationId: this.currentConvo.id,
+      };
+      console.log(broadcastMsg);
+      this.$socket.emit("NEW_MESSAGE", broadcastMsg, err => {
+        if (err) {
+          console.error(err);
+        }
+      });
     },
     onChangeConvo(convoId) {
       this.$store.dispatch("CHANGE_CURRENT_CONVO", convoId);
@@ -81,10 +97,15 @@ export default {
     ...mapState({
       currentClassroom: state => state.Classroom.currentClassroom,
       currentConvo: state => state.Message.currentConvo,
+      currentUser: state => state.Auth.user,
     }),
   },
   created() {
     this.fetchData();
+    this.$socket.open();
+  },
+  beforeDestroy() {
+    this.$socket.close();
   },
 };
 </script>

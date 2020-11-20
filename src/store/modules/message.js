@@ -24,6 +24,12 @@ export default {
       let listConvos = state.conversations[classroomId];
       state.currentConvo = listConvos.find(convo => convo.id === convoId);
     },
+    ADD_MESSAGE(state, { convoId, newMsg }) {
+      let convoMessages = state.messages[convoId];
+      if (convoMessages) {
+        convoMessages.push(newMsg);
+      }
+    },
   },
   actions: {
     /**
@@ -60,9 +66,17 @@ export default {
           .catch(reject);
       });
     },
+    /**
+     * Change current convo to the conversation with the given id.
+     * @param {Number} convoId
+     */
     CHANGE_CURRENT_CONVO({ commit, rootState }, convoId) {
       const currentClassroom = rootState.Classroom.currentClassroom;
       commit("CHANGE_CURRENT_CONVO", { convoId, classroomId: currentClassroom.id });
+    },
+    SOCKET_MSG_NEW_MESSAGE({ commit }, newMsg) {
+      let convoId = newMsg.conversationId;
+      commit("ADD_MESSAGE", { convoId, newMsg });
     },
   },
   getters: {
