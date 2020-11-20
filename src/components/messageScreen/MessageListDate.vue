@@ -1,10 +1,11 @@
 <template>
   <div id="message-list-date" class="pa-0 my-2">
-    <span :class="getClass">October 20, 2020</span>
+    <span :class="getClass">{{ formatDate }}</span>
   </div>
 </template>
 
 <script>
+import { formatMessageListDate } from "@/utils/date.util";
 export default {
   name: "MessageListDate",
   props: {
@@ -23,6 +24,9 @@ export default {
       } else {
         return ["pa-2", "ma-0", "theme-light"];
       }
+    },
+    formatDate() {
+      return formatMessageListDate(this.date);
     },
   },
 };

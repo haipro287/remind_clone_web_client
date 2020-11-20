@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-dialog v-on="on" v-model="dialog"> </v-dialog>
+    <v-dialog v-model="dialog"> </v-dialog>
   </v-row>
 </template>
 <script>
