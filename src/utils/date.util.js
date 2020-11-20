@@ -24,9 +24,13 @@ export function isSameDay(date1, date2) {
 }
 
 /**
- * Format
+ *
  * @param {Date} inputDate
  */
 export function formatMessageItemTimestamp(inputDate) {
   return dayjs(inputDate).format("h:mm A");
+}
+
+export function formatFileTimestamp(inputDate) {
+  return dayjs(inputDate).format("h:mm A, MMM D, YYYY");
 }

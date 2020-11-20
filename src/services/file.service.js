@@ -1,5 +1,9 @@
-import firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/storage";
+import axios from "./axios";
+
+const GET_CLASSROOM_FILES = "/api/file";
+const ADD_FILE = "/api/file";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,3 +19,19 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const firestore = firebase.storage();
+
+export function getClassroomFiles(classroomId) {
+  return axios.get(`${GET_CLASSROOM_FILES}/${classroomId}`);
+}
+
+export function addFile({ name, type, size, url }, classroomId, message) {
+  return axios.post(`${ADD_FILE}/${classroomId}`, {
+    data: {
+      name,
+      type,
+      url,
+      size,
+      message,
+    },
+  });
+}
