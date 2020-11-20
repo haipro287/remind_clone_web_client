@@ -9,7 +9,7 @@
     <div v-if="convoIdParam" class="d-flex flex-column width-100 fit-v-viewport">
       <div id="conversation-app-bar" class="pa-5 d-flex align-center justify-space-between">
         <h3>{{ currentConvo.conversation_name }}</h3>
-        <v-btn icon>
+        <v-btn icon @click="showDetails = !showDetails">
           <v-icon>mdi-alert-circle-outline</v-icon>
         </v-btn>
       </div>
@@ -26,6 +26,7 @@
       <message-text-box @submit="onSendMessage" />
     </div>
     <conversation-empty-screen v-else />
+    <conversation-details v-if="convoIdParam && showDetails" :convoId="convoIdParam" />
   </v-container>
 </template>
 
@@ -38,6 +39,7 @@ import MessageListDate from "@/components/messageScreen/MessageListDate.vue";
 import CreateNewMessageDialog from "../../components/messageScreen/createNewMessageDialog.vue";
 import { mapGetters, mapState } from "vuex";
 import ConversationEmptyScreen from "../../components/messageScreen/conversationEmptyScreen.vue";
+import ConversationDetails from "../../components/messageScreen/ConversationDetails.vue";
 
 export default {
   name: "MessageScreen",
@@ -48,9 +50,12 @@ export default {
     MessageListDate,
     CreateNewMessageDialog,
     ConversationEmptyScreen,
+    ConversationDetails,
   },
   data() {
-    return {};
+    return {
+      showDetails: false,
+    };
   },
   watch: {
     $route: "fetchData",
