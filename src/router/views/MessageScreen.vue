@@ -25,6 +25,7 @@
       </div>
       <message-text-box @submit="onSendMessage" />
     </div>
+    <conversation-empty-screen v-else />
   </v-container>
 </template>
 
@@ -36,6 +37,7 @@ import ConversationItem from "@/components/messageScreen/ConversationItem.vue";
 import MessageListDate from "@/components/messageScreen/MessageListDate.vue";
 import CreateNewMessageDialog from "../../components/messageScreen/createNewMessageDialog.vue";
 import { mapGetters, mapState } from "vuex";
+import ConversationEmptyScreen from "../../components/messageScreen/conversationEmptyScreen.vue";
 
 export default {
   name: "MessageScreen",
@@ -45,6 +47,7 @@ export default {
     ConversationItem,
     MessageListDate,
     CreateNewMessageDialog,
+    ConversationEmptyScreen,
   },
   data() {
     return {};
