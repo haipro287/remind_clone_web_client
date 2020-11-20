@@ -6,7 +6,7 @@
         <conversation-item @click="onChangeConvo" :convoObj="convo" :avatarUrl="convo.avatarUrl" />
       </v-list>
     </div>
-    <div class="d-flex flex-column width-100 fit-v-viewport">
+    <div v-if="convoIdParam" class="d-flex flex-column width-100 fit-v-viewport">
       <div id="conversation-app-bar" class="pa-5 d-flex align-center justify-space-between">
         <h3>{{ currentConvo.conversation_name }}</h3>
         <v-btn icon>
@@ -14,12 +14,14 @@
         </v-btn>
       </div>
       <div id="message-list-item" class="fill-height">
-        <message-item
-          v-for="message in currentConvoMessages"
-          :key="message.id"
-          :message="message"
-          :isMine="message.sender.id === currentUser.id"
-        />
+        <template v-for="(message, i) in currentConvoMessages">
+          <message-list-date
+            :date="message.createdAt"
+            :key="'date' + message.id"
+            v-if="i == 0 || (i > 0 && !isSameDay(i))"
+          />
+          <message-item :key="message.id" :message="message" :isMine="message.sender.id === currentUser.id" />
+        </template>
       </div>
       <message-text-box @submit="onSendMessage" />
     </div>
@@ -27,6 +29,7 @@
 </template>
 
 <script>
+import { isSameDay } from "@/utils/date.util";
 import MessageItem from "@/components/messageScreen/MessageItem.vue";
 import MessageTextBox from "@/components/messageScreen/MessageTextBox.vue";
 import ConversationItem from "@/components/messageScreen/ConversationItem.vue";
@@ -40,55 +43,54 @@ export default {
     MessageItem,
     MessageTextBox,
     ConversationItem,
-    // eslint-disable-next-line vue/no-unused-components
     MessageListDate,
     CreateNewMessageDialog,
   },
-  sockets: {
-    message: function(msg) {
-      console.log(msg);
-    },
-  },
   data() {
-    return {
-      messageList: [],
-    };
+    return {};
   },
   watch: {
     $route: "fetchData",
+    currentConvoMessages: "scrollToEnd",
   },
   methods: {
     async fetchData() {
       const currentClassroomId = this.$store.state.Classroom.currentClassroom.id;
-      const currentConvoId = this.$route.params.convoId;
+      const currentConvoId = this.convoIdParam;
       await this.$store.dispatch("FETCH_CLASS_CONVOS", currentClassroomId);
-      await this.$store.dispatch("FETCH_CONVO_MESSAGES", currentConvoId);
+      if (currentConvoId) {
+        await this.$store.dispatch("FETCH_CONVO_MESSAGES", currentConvoId);
+      }
     },
     onSendMessage(msg) {
-      console.log(msg);
       let broadcastMsg = {
         sender: {
           id: this.currentUser.id,
           name: this.currentUser.name,
+          avatar_url: this.currentUser.avatar_url,
         },
         messageText: msg,
         createdAt: new Date(),
         conversationId: this.currentConvo.id,
       };
       console.log(broadcastMsg);
-      this.$socket.emit("NEW_MESSAGE", broadcastMsg, err => {
+      this.$socket.emit("NEW_MESSAGE", broadcastMsg, (err, ackMsg) => {
         if (err) {
           console.error(err);
         }
+        console.log(ackMsg);
       });
     },
     onChangeConvo(convoId) {
       this.$store.dispatch("CHANGE_CURRENT_CONVO", convoId);
-      this.$router.push({
-        name: "Message",
-        params: {
-          convoId,
-        },
+    },
+    isSameDay(i) {
+      return isSameDay(this.currentConvoMessages[i].createdAt, this.currentConvoMessages[i - 1].createdAt);
+    },
+    scrollToEnd() {
+      this.$nextTick(() => {
+        const container = this.$el.querySelector("#message-list-item");
+        container.scrollTop = container.scrollHeight;
       });
     },
   },
@@ -99,13 +101,12 @@ export default {
       currentConvo: state => state.Message.currentConvo,
       currentUser: state => state.Auth.user,
     }),
+    convoIdParam() {
+      return this.$route.params.convoId;
+    },
   },
   created() {
     this.fetchData();
-    this.$socket.open();
-  },
-  beforeDestroy() {
-    this.$socket.close();
   },
 };
 </script>

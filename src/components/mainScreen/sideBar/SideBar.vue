@@ -129,6 +129,7 @@ export default {
           title: "Log out",
           icon: "mdi-logout-variant",
           onClick: () => {
+            this.$socket.close();
             this.$router.push("/login");
           },
         },

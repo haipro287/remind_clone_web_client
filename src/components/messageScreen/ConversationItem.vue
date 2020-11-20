@@ -1,5 +1,5 @@
 <template>
-  <v-list-item link class="py-0" @click="onClick">
+  <v-list-item :to="toConvo" class="py-0" @click="onClick">
     <v-list-item-avatar v-if="avatarUrl">
       <v-img :src="avatarUrl"></v-img>
     </v-list-item-avatar>
@@ -28,6 +28,11 @@ export default {
   methods: {
     onClick() {
       this.$emit("click", this.convoObj.id);
+    },
+  },
+  computed: {
+    toConvo() {
+      return { name: "Message", params: { convoId: this.convoObj.id } };
     },
   },
 };

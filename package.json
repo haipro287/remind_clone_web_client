@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "dayjs": "^1.9.6",
     "express": "^4.17.1",
     "socket.io-client": "2.3.x",
     "vue": "^2.6.11",

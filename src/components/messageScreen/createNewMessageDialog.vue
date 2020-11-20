@@ -7,6 +7,7 @@
       </v-btn>
     </template>
     <v-card>
+      <user-search-box :options="[]" />
       <v-textarea
         v-model="newMessage"
         solo
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import UserSearchBox from "./UserSearchBox.vue";
 export default {
   data() {
     return {
@@ -40,6 +42,7 @@ export default {
       newMessage: "",
     };
   },
+  components: { UserSearchBox },
   methods: {
     onAccept() {
       // submit message

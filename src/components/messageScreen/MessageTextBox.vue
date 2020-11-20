@@ -11,6 +11,7 @@
       rows="2"
       no-resize
       :background-color="isDark ? undefined : '#f5f5f5'"
+      @keydown.enter.exact.prevent="onSend"
     ></v-textarea>
     <div id="message-text-box-menu" class="d-flex">
       <v-btn icon tile color="primary">
