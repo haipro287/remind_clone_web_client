@@ -5,13 +5,14 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VueSocketIO from "vue-socket.io";
 import io from "socket.io-client";
+import { serverAPI } from "./utils/constants";
 
 Vue.config.productionTip = false;
 
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: io("http://localhost:3000/message", {
+    connection: io(`${serverAPI.BASE_URL || "http://localhost:3000"}/message`, {
       query: {
         token: store.state.Auth.token,
       },
