@@ -68,12 +68,16 @@ export default {
       const user = this.user;
       const keepSignedIn = this.keepSignedIn;
       this.$store.dispatch(AUTH_LOGIN, { user, keepSignedIn }).then(() => {
+        this.setSocketToken(this.$store.state.Auth.token);
         this.$socket.open();
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect);
         }
         this.$router.push({ path: "/classes" });
       });
+    },
+    setSocketToken(token) {
+      this.$socket.io.opts.query.token = token;
     },
   },
 };
