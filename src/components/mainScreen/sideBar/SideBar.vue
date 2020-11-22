@@ -130,6 +130,7 @@ export default {
           icon: "mdi-logout-variant",
           onClick: () => {
             this.$socket.close();
+            this.$store.dispatch("RESET_STATE");
             this.$router.push("/login");
           },
         },

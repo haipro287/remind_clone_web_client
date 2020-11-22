@@ -13,4 +13,10 @@ export default new Vuex.Store({
     Classroom,
     Message,
   },
+  actions: {
+    RESET_STATE({ commit }) {
+      commit("RESET_CLASSROOM");
+      commit("RESET_MESSAGE");
+    },
+  },
 });
