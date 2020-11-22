@@ -31,10 +31,10 @@
               </v-col>
               <v-col>
                 <v-col cols="12" md="12">
-                  <v-text-field label="Class name" required></v-text-field>
+                  <v-text-field v-model="classroom.name" label="Class name" required></v-text-field>
                 </v-col>
                 <v-col cols="12" md="12">
-                  <v-text-field prefix="@" label="Class code"></v-text-field>
+                  <v-text-field v-model="classroom.school" label="School name" required></v-text-field>
                 </v-col>
               </v-col>
             </v-row>
@@ -43,14 +43,17 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
+          <v-btn color="blue darken-1" text @click="createClassroom"> Save </v-btn>
         </v-card-actions>
-      </v-card> </v-dialog
-    ><icon-picker v-model="showAvatarPicker" :current-avatar="avatar" @selected="selectAvatar"></icon-picker>
+      </v-card>
+    </v-dialog>
+    <icon-picker v-model="showAvatarPicker" :current-avatar="avatar" @selected="selectAvatar"></icon-picker>
   </v-row>
 </template>
 <script>
 import IconPicker from "@/components/mainScreen/sideBar/createClass/IconPicker";
+import axios from "../../../../services/axios";
+
 export default {
   components: { IconPicker },
   data() {
@@ -58,6 +61,10 @@ export default {
       dialog: false,
       avatar: "apple",
       showAvatarPicker: false,
+      classroom: {
+        name: "",
+        school: "",
+      },
     };
   },
   methods: {
@@ -66,6 +73,14 @@ export default {
     },
     selectAvatar(avatar) {
       this.avatar = avatar;
+    },
+    createClassroom() {
+      axios.post("/api/classroom/", this.classroom).then(res => {
+        if (res.status === 201 && res.data.data.code != null) {
+          console.log(res.data.data);
+          this.dialog = false;
+        }
+      });
     },
   },
 };
