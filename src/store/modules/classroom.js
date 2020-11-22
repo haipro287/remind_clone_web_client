@@ -3,8 +3,9 @@ import Vue from "vue";
 
 export default {
   state: () => ({
-    classrooms: {},
+    classrooms: {}, // classrooms[classId] = Classroom
     currentClassroom: {},
+    classroomMembers: {}, // classroomMembers[classId] = Array<User>
   }),
   mutations: {
     /**
@@ -16,6 +17,14 @@ export default {
       Vue.set(state.classrooms, newClass.id, newClass);
     },
     /**
+     *
+     * @param {Number} classId
+     * @param {Array} members
+     */
+    SET_CLASS_MEMBERS(state, classId, members) {
+      Vue.set(state.classroomMembers, classId, members);
+    },
+    /**
      * Change current class to the class with {code}
      * @param {*} state
      * @param {String} newClassCode Code of the class to switch to
@@ -25,8 +34,14 @@ export default {
       const nextClassroom = classrooms.find(c => c.code === newClassCode);
       state.currentClassroom = nextClassroom;
     },
+    RESET_CLASSROOM(state) {
+      state.currentClassroom = {};
+      state.classrooms = {};
+      state.classroomMembers = {};
+    },
   },
   actions: {
+    // shoud have been named GET_CLASSES, then FETCH_CLASSES
     FETCH_CLASSES({ commit, getters }) {
       return new Promise((resolve, reject) => {
         if (getters.isClassFetched) {
@@ -47,6 +62,17 @@ export default {
           .catch(reject);
       });
     },
+    RESET_CLASSROOM({ commit }) {
+      commit("RESET_CLASSROOM");
+    },
+    // FETCH_MEMBERS({ commit, state }, classroomId) {
+    //   return new Promise((resolve, reject) => {
+    //     if (state.classroomMembers[classroomId]) {
+    //       return state.classroomMembers[classroomId];
+    //     }
+
+    //   })
+    // },
   },
   getters: {
     isClassFetched: state => {

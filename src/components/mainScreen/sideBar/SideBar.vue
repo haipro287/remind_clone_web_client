@@ -132,6 +132,7 @@ export default {
           onClick: () => {
             this.logout();
             this.$socket.close();
+            this.$store.dispatch("RESET_STATE");
           },
         },
       ],

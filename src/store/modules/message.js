@@ -30,6 +30,11 @@ export default {
         convoMessages.push(newMsg);
       }
     },
+    RESET_MESSAGE(state) {
+      state.currentConvo = {};
+      state.messages = {};
+      state.conversations = {};
+    },
   },
   actions: {
     /**
@@ -77,6 +82,9 @@ export default {
     SOCKET_MSG_NEW_MESSAGE({ commit }, newMsg) {
       let convoId = newMsg.conversationId;
       commit("ADD_MESSAGE", { convoId, newMsg });
+    },
+    RESET_MESSAGE({ commit }) {
+      commit("RESET_MESSAGE");
     },
   },
   getters: {
