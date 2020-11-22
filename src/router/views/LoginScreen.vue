@@ -65,12 +65,17 @@ export default {
   methods: {
     login() {
       this.$store.dispatch(AUTH_LOGIN, this.user).then(() => {
+        this.setSocketToken(this.$store.state.Auth.token);
+        console.log(this.$socket);
         this.$socket.open();
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect);
         }
         this.$router.push({ path: "/classes" });
       });
+    },
+    setSocketToken(token) {
+      this.$socket.io.opts.query.token = token;
     },
   },
 };
