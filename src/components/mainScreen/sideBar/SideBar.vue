@@ -131,6 +131,7 @@ export default {
           icon: "mdi-logout-variant",
           onClick: () => {
             this.logout();
+            this.$socket.close();
           },
         },
       ],

@@ -30,7 +30,7 @@ export default {
     FETCH_CLASSES({ commit, getters }) {
       return new Promise((resolve, reject) => {
         if (getters.isClassFetched) {
-          resolve();
+          return resolve();
         }
         getClassrooms()
           .then(res => {

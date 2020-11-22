@@ -68,6 +68,7 @@ export default {
       const user = this.user;
       const keepSignedIn = this.keepSignedIn;
       this.$store.dispatch(AUTH_LOGIN, { user, keepSignedIn }).then(() => {
+        this.$socket.open();
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect);
         }

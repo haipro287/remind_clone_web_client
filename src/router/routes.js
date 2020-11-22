@@ -72,8 +72,13 @@ export default [
     children: [
       {
         path: "message",
-        name: "Message",
+        name: "MessageStart",
         alias: [""],
+        component: () => import("./views/MessageScreen.vue"),
+      },
+      {
+        path: "message/:convoId",
+        name: "Message",
         component: () => import("./views/MessageScreen.vue"),
       },
       {
