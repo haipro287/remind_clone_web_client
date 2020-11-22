@@ -7,7 +7,7 @@
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="className">{{ currentClassroom.name }}</v-list-item-title>
-          <v-list-item-subtitle>@{{ $route.params.code }}</v-list-item-subtitle>
+          <v-list-item-subtitle>@{{ currentClassroom.code }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </v-toolbar-title>
@@ -15,7 +15,7 @@
     <add-people></add-people>
     <template v-slot:extension>
       <v-tabs align-with-title color="#2196f3">
-        <v-tab v-for="tab in tabs" :key="tab.name" @click="$router.push({ name: tab.routeName })">
+        <v-tab v-for="tab in tabs" :key="tab.name" :to="{ name: tab.routeName }">
           {{ tab.name }}
         </v-tab>
       </v-tabs>

@@ -20,7 +20,7 @@
           <v-container>
             <v-row>
               <v-col>
-                <v-text-field prefix="@" label="Class code"></v-text-field>
+                <v-text-field prefix="@" label="Class code" v-model="classroom.code"></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -28,20 +28,40 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="dialog = false"> Close </v-btn>
-          <v-btn color="blue darken-1" text @click="dialog = false"> Save </v-btn>
+          <v-btn color="blue darken-1" text @click="joinClassroom"> Save </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-row>
 </template>
 <script>
+import axios from "../../../../services/axios";
+
 export default {
   data() {
     return {
       dialog: false,
+      classroom: {
+        code: null,
+      },
     };
   },
-  methods: {},
+  methods: {
+    joinClassroom() {
+      axios
+        .post(`/api/classroom/join/${this.classroom.code}`)
+        .then(res => {
+          if (res.status === 201 && res.data.data.code != null) {
+            console.log(res.data.data);
+            this.dialog = false;
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      this.dialog = false;
+    },
+  },
 };
 </script>
 <style scoped>

@@ -22,10 +22,11 @@
             :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'"
             @click:append="showPassword = !showPassword"
+            @keyup.enter.exact="login"
           >
           </v-text-field>
-          <v-checkbox v-model="keepsignin" :label="`Stay logged in`"> </v-checkbox>
-          <v-btn block elevation="4" color="primary" @click="login()"> Log in </v-btn>
+          <v-checkbox v-model="keepSignedIn" :label="`Stay logged in`"> </v-checkbox>
+          <v-btn block elevation="4" color="primary" @click="login"> Log in </v-btn>
           <p class="orDivider"> OR </p>
           <v-btn block elevation="4" max-width="370px">
             <v-avatar size="3%" class="mr-3">
@@ -35,7 +36,7 @@
           </v-btn>
           <p class="orDivider">
             Don't have an account?
-            <a ref=""> Sign up!</a>
+            <router-link to="/register"> Sign up! </router-link>
           </p>
         </v-form>
       </div>
@@ -58,13 +59,15 @@ export default {
         email: "",
         password: "",
       },
-      keepsignin: false,
+      keepSignedIn: false,
       showPassword: false,
     };
   },
   methods: {
     login() {
-      this.$store.dispatch(AUTH_LOGIN, this.user).then(() => {
+      const user = this.user;
+      const keepSignedIn = this.keepSignedIn;
+      this.$store.dispatch(AUTH_LOGIN, { user, keepSignedIn }).then(() => {
         this.$socket.open();
         if (this.$route.query.redirect) {
           this.$router.push(this.$route.query.redirect);
