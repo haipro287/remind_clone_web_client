@@ -10,11 +10,11 @@ export default [
     name: "Home",
     beforeEnter(to, from, next) {
       if (store.getters.isAuthenticated) {
-        next({
+        return next({
           path: "/classes",
         });
       } else {
-        next({
+        return next({
           path: "/login",
         });
       }
