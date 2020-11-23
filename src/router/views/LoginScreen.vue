@@ -71,9 +71,9 @@ export default {
         this.setSocketToken(this.$store.state.Auth.token);
         this.$socket.open();
         if (this.$route.query.redirect) {
-          this.$router.push(this.$route.query.redirect);
+          return this.$router.push(this.$route.query.redirect);
         }
-        this.$router.push({ path: "/classes" });
+        this.$router.push({ name: "ClassStart" });
       });
     },
     setSocketToken(token) {

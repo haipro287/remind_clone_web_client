@@ -51,7 +51,7 @@
         <v-list-item
           v-for="item in ownedClassrooms"
           :key="item.id"
-          :to="`/classes/${item.code}/message`"
+          :to="{ path: `/classes/${item.code}` }"
           style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">
@@ -68,7 +68,7 @@
         <v-list-item
           v-for="item in joinedClassrooms"
           :key="item.id"
-          :to="'/classes/' + item.code"
+          :to="{ path: `/classes/${item.code}` }"
           style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">

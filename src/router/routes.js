@@ -27,6 +27,7 @@ export default [
   },
   {
     path: "/classes",
+    name: "ClassStart",
     beforeEnter(to, from, next) {
       store
         .dispatch("FETCH_CLASSES")
@@ -34,14 +35,14 @@ export default [
           const firstClass = Object.values(store.state.Classroom.classrooms)[0];
           // console.log(firstClass);
           if (firstClass) {
-            next({
-              name: "Message",
+            return next({
+              name: "MessageStart",
               params: {
                 code: firstClass.code,
               },
             });
           } else {
-            next({ name: "About" });
+            return next({ name: "About" });
           }
         })
         .catch(() => {
@@ -54,7 +55,6 @@ export default [
   },
   {
     path: "/classes/:code",
-    name: "Classes",
     component: Classes,
     meta: {
       requiresAuth: true,
@@ -71,9 +71,9 @@ export default [
     },
     children: [
       {
-        path: "message",
+        path: "",
         name: "MessageStart",
-        alias: [""],
+        alias: "message",
         component: () => import("./views/MessageScreen.vue"),
       },
       {

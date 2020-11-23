@@ -18,9 +18,9 @@ router.beforeEach((to, from, next) => {
     if (store.getters.isAuthenticated) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${store.state.Auth.token}`;
       store.dispatch(GET_USER);
-      next();
+      return next();
     } else {
-      next({
+      return next({
         name: "Login",
         query: {
           redirect: to.path,
@@ -28,7 +28,7 @@ router.beforeEach((to, from, next) => {
       });
     }
   } else {
-    next();
+    return next();
   }
 });
 
