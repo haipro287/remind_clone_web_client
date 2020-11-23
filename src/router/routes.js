@@ -1,4 +1,4 @@
-import About from "./views/About.vue";
+import Home from "./views/Home.vue";
 import Login from "./views/LoginScreen.vue";
 import Classes from "./views/MainScreen.vue";
 import Register from "./views/Register.vue";
@@ -8,7 +8,17 @@ export default [
   {
     path: "/",
     name: "Home",
-    component: () => import("./views/Home.vue"),
+    beforeEnter(to, from, next) {
+      if (store.getters.isAuthenticated) {
+        next({
+          path: "/classes",
+        });
+      } else {
+        next({
+          path: "/login",
+        });
+      }
+    },
   },
   {
     path: "/login",
@@ -23,7 +33,7 @@ export default [
   {
     path: "/about",
     name: "About",
-    component: About,
+    component: Home,
   },
   {
     path: "/classes",

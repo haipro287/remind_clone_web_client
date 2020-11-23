@@ -11,6 +11,7 @@
             placeholder="user@remind-clone.com"
             outlined
             required
+            @keyup.enter.exact="login"
           >
           </v-text-field>
           <v-text-field
