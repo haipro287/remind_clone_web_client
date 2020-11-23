@@ -98,7 +98,7 @@ export default {
     scrollToEnd() {
       this.$nextTick(() => {
         const container = this.$el.querySelector("#message-list-item");
-        container.scrollTop = container.scrollHeight;
+        if (container) container.scrollTop = container.scrollHeight;
       });
     },
   },

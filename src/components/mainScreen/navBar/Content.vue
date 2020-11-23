@@ -33,7 +33,7 @@ export default {
   data() {
     return {
       tabs: [
-        { name: "Message", routeName: "Message" },
+        { name: "Message", routeName: "MessageStart" },
         { name: "File", routeName: "Files" },
         { name: "People", routeName: "People" },
         { name: "Information", routeName: "Information" },

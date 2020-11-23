@@ -6,6 +6,7 @@ import vuetify from "./plugins/vuetify";
 import axios from "./services/axios";
 import VueSocketIO from "vue-socket.io";
 import io from "socket.io-client";
+import { serverAPI } from "./utils/constants";
 
 Vue.config.productionTip = false;
 
@@ -14,7 +15,7 @@ Vue.prototype.$axios = axios;
 Vue.use(
   new VueSocketIO({
     debug: true,
-    connection: io("http://localhost:3000/message", {
+    connection: io(`${serverAPI.BASE_URL}/message`, {
       query: {
         token: store.state.Auth.token,
       },
