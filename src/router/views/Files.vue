@@ -1,15 +1,18 @@
 <template>
   <v-container class="mx-0 ml-5">
-    <v-card class="pa-4" elevation="1">
+    <v-card :loading="loading" class="pa-4" elevation="1">
+      <template slot="progress">
+        <v-progress-linear color="primary" height="10" indeterminate></v-progress-linear>
+      </template>
       <v-card-title>
         <v-row>
           <v-col class="col-10"> Files </v-col>
           <v-col class="col-2">
-            <upload-file></upload-file>
+            <upload-file @uploaded="onFileUpload"></upload-file>
           </v-col>
         </v-row>
       </v-card-title>
-      <v-list max-width="500px" subheader two-line>
+      <v-list max-width="500px" subheader two-line v-if="files.length > 0">
         <v-list-item v-for="file in files" :key="file.name" @click.stop="showFileDetails = true">
           <v-list-item-avatar>
             <v-icon class="blue lighten-1" dark> mdi-file </v-icon>
@@ -30,6 +33,9 @@
           </v-list-item-action>
         </v-list-item>
       </v-list>
+      <v-container v-else-if="!this.loading" class="d-flex flex-column justify-center align-center py-4">
+        <img src="/assets/folder.svg" width="180" />
+      </v-container>
     </v-card>
   </v-container>
 </template>
@@ -47,11 +53,15 @@ export default {
     return {
       showFileDetails: false,
       files: [],
+      loading: true,
     };
   },
   methods: {
     formatTs(date) {
       return formatFileTimestamp(date);
+    },
+    onFileUpload(newFile) {
+      this.files.push(newFile);
     },
   },
   computed: {
@@ -64,6 +74,7 @@ export default {
       .then(res => res.data)
       .then(data => {
         this.files = data.data;
+        this.loading = false;
       });
   },
 };

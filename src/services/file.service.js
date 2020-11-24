@@ -26,12 +26,10 @@ export function getClassroomFiles(classroomId) {
 
 export function addFile({ name, type, size, url }, classroomId, message) {
   return axios.post(`${ADD_FILE}/${classroomId}`, {
-    data: {
-      name,
-      type,
-      url,
-      size,
-      message,
-    },
+    name,
+    type,
+    url,
+    size,
+    message,
   });
 }
