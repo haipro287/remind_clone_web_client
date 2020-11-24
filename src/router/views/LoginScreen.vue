@@ -60,7 +60,7 @@ export default {
         email: "",
         password: "",
       },
-      keepSignedIn: false,
+      keepSignedIn: true,
       showPassword: false,
     };
   },
