@@ -86,7 +86,9 @@
         </g>
       </g>
     </svg>
-    <v-btn class="mt-10" color="primary" outlined href="/classes"><v-icon left>mdi-home</v-icon>Go back home</v-btn>
+    <v-btn class="mt-10" color="primary" outlined :to="{ name: 'ClassStart' }"
+      ><v-icon left>mdi-home</v-icon>Go back home</v-btn
+    >
   </div>
 </template>
 <script>
