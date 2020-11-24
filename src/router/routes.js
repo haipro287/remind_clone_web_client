@@ -37,7 +37,7 @@ export default [
   },
   {
     path: "/classes",
-    name: "ClassStart",
+    component: Classes,
     beforeEnter(to, from, next) {
       store
         .dispatch("FETCH_CLASSES")
@@ -52,7 +52,7 @@ export default [
               },
             });
           } else {
-            return next({ name: "About" });
+            return next();
           }
         })
         .catch(() => {
@@ -62,6 +62,13 @@ export default [
     meta: {
       requiresAuth: true,
     },
+    children: [
+      {
+        path: "",
+        name: "ClassStart",
+        component: () => import("@/components/mainScreen/EmptyScreen.vue"),
+      },
+    ],
   },
   {
     path: "/classes/:code",
@@ -115,7 +122,7 @@ export default [
   },
   {
     path: "*",
-    name: "Coming soon",
+    name: "404",
     component: () => import("./views/comingSoon.vue"),
   },
   {

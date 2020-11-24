@@ -1,7 +1,7 @@
 <template>
   <div>
     <side-bar />
-    <nav-bar />
+    <nav-bar v-if="currentClassroom.name" />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -27,12 +27,12 @@ export default {
       }
 
       if (currentClassCode) {
-        this.$store.commit("SET_CURRENT_CLASS", currentClassCode);
         // set current class
+        this.$store.commit("SET_CURRENT_CLASS", currentClassCode);
         // if the class with that code doesn't exist,
         // navigate to 404
+        if (!this.currentClassroom.name) this.$router.push({ name: "404" });
       } else {
-        this.$router.push({ name: "404" });
         // navigate to first class or 404
       }
     },
