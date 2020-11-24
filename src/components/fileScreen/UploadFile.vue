@@ -42,8 +42,8 @@
           <div v-else class="dropZone-uploaded">
             <div class="dropZone-uploaded-info">
               <div class="dropZone-upload-limit-info">
-                <div>FileName: {{ file.name }}</div>
-                <div>FileSize: {{ file.size }} bytes</div>
+                <div>File Name: {{ file.name }}</div>
+                <div>File Size: {{ file.size }} bytes</div>
               </div>
               <v-row class="mt-2">
                 <v-btn class="warning mr-2" @click="removeFile">
@@ -72,7 +72,8 @@
   </v-row>
 </template>
 <script>
-import { firestore } from "../../services/file.service.js";
+import { firestore, addFile } from "../../services/file.service.js";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -118,10 +119,25 @@ export default {
           this.uploadValue = 100;
           uploadTask.snapshot.ref.getDownloadURL().then(url => {
             this.fileURL = url; // URL of file nekk
+            addFile(
+              { name: this.file.name, size: this.file.size, url: this.fileURL, type: this.file.type },
+              this.currentClassroom.id,
+              this.message
+            )
+              .then(res => res.data)
+              .then(data => {
+                let newFile = data.data;
+                this.$emit("uploaded", newFile);
+              });
           });
         }
       );
     },
+  },
+  computed: {
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+    }),
   },
 };
 </script>

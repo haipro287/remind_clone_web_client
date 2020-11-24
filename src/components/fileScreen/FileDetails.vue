@@ -16,12 +16,13 @@
               <v-list-item two-line>
                 <v-list-item-content>
                   <v-list-item-title>Lesson1.txt</v-list-item-title>
-                  <v-list-item-subtitle>xx/xx/xxxx</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-col>
             <v-col lg="2">
-              <v-btn color="blue lighten-1" style="color: white; margin-top: 12px"> View </v-btn>
+              <v-btn color="blue lighten-1" style="color: white; margin-top: 12px" :href="fileObj.url" target="_blank">
+                View
+              </v-btn>
             </v-col>
           </v-row>
           <v-divider></v-divider>
@@ -46,22 +47,26 @@
 export default {
   props: {
     value: Boolean,
+    fileObj: {
+      type: Object,
+      required: true,
+    },
   },
   data() {
     return {
       items: [
         {
-          title: "MEESAGE",
-          value: "Ahihi",
+          title: "MESSAGE",
+          value: this.fileObj.message,
         },
         {
           title: "SHARED ON",
-          value: "xx/xx/xxxx",
+          value: this.fileObj.created_at,
         },
-        {
-          title: "SHARED BY",
-          value: "Pham Thi Dan",
-        },
+        // {
+        //   title: "SHARED BY",
+        //   value: "Pham Thi Dan",
+        // },
       ],
     };
   },
