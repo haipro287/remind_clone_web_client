@@ -1,4 +1,4 @@
-import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_SUCCESS } from "../actions/auth";
+import { AUTH_LOGIN, AUTH_LOGOUT, AUTH_ERROR, AUTH_SUCCESS, GET_USER } from "../actions/auth";
 import axios from "../../services/axios";
 
 const state = {
@@ -10,17 +10,22 @@ const state = {
 const getters = {
   isAuthenticated: state => !!state.token,
   authStatus: state => state.status,
+  user: state => state.user,
 };
 
 const actions = {
-  [AUTH_LOGIN]: ({ commit }, user) => {
+  [AUTH_LOGIN]: ({ commit }, { user, keepSignedIn }) => {
     return new Promise((resolve, reject) => {
       commit(AUTH_LOGIN);
       axios
         .post("/api/user/auth/login", user)
         .then(res => {
           commit(AUTH_SUCCESS, res.data);
-          localStorage.setItem("token", res.data.data.token);
+          console.log(keepSignedIn);
+          if (keepSignedIn === true) {
+            localStorage.setItem("token", res.data.data.token);
+            console.log(1);
+          }
           resolve(res);
         })
         .catch(err => {
@@ -35,6 +40,23 @@ const actions = {
     return new Promise(resolve => {
       commit(AUTH_LOGOUT);
       localStorage.removeItem("token");
+      resolve();
+    });
+  },
+  [GET_USER]: ({ commit }) => {
+    return new Promise((resolve, reject) => {
+      if (getters.isAuthenticated) {
+        axios
+          .get("/api/user/profile")
+          .then(res => {
+            const user = res.data.data;
+            commit(GET_USER, user);
+            resolve(res);
+          })
+          .catch(err => {
+            reject(err);
+          });
+      }
       resolve();
     });
   },
@@ -54,6 +76,11 @@ const mutations = {
   },
   [AUTH_LOGOUT]: state => {
     state.token = "";
+    state.user = {};
+    state.status = "";
+  },
+  [GET_USER]: (state, user) => {
+    state.user = user;
   },
 };
 

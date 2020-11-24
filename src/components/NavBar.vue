@@ -8,8 +8,8 @@
       link.name
     }}</v-btn>
     <v-btn text height="100%" @click="switchTheme"
-      ><v-icon>{{ $vuetify.theme.dark ? "mdi-brightness-4" : "mdi-brightness-6" }}</v-icon></v-btn
-    >
+      ><v-icon>{{ $vuetify.theme.dark ? "mdi-brightness-4" : "mdi-brightness-6" }}</v-icon>
+    </v-btn>
   </v-app-bar>
 </template>
 
@@ -19,10 +19,6 @@ export default {
   data() {
     return {
       links: [
-        {
-          path: "/",
-          name: "Home",
-        },
         {
           path: "/about",
           name: "About",

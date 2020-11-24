@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import routes from "./routes";
 import store from "../store";
 import axios from "../services/axios";
+import { GET_USER } from "../store/actions/auth";
 
 Vue.use(VueRouter);
 
@@ -16,9 +17,10 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(route => route.meta.requiresAuth)) {
     if (store.getters.isAuthenticated) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${store.state.Auth.token}`;
-      next();
+      store.dispatch(GET_USER);
+      return next();
     } else {
-      next({
+      return next({
         name: "Login",
         query: {
           redirect: to.path,
@@ -26,7 +28,7 @@ router.beforeEach((to, from, next) => {
       });
     }
   } else {
-    next();
+    return next();
   }
 });
 

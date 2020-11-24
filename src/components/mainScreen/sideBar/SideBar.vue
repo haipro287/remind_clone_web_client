@@ -15,7 +15,7 @@
                     <v-list-item-content>
                       <v-list-item-subtitle>Hello,</v-list-item-subtitle>
                       <v-list-item-title v-bind="attrs" v-on="on">
-                        Pham Thi Dan
+                        {{ user.name }}
                         <v-icon>mdi-chevron-down</v-icon>
                       </v-list-item-title>
                     </v-list-item-content>
@@ -51,7 +51,7 @@
         <v-list-item
           v-for="item in ownedClassrooms"
           :key="item.id"
-          :to="'/classes/' + item.code"
+          :to="{ path: `/classes/${item.code}` }"
           style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">
@@ -68,7 +68,7 @@
         <v-list-item
           v-for="item in joinedClassrooms"
           :key="item.id"
-          :to="'/classes/' + item.code"
+          :to="{ path: `/classes/${item.code}` }"
           style="margin-right: 25px"
         >
           <v-list-item-avatar size="25px" style="margin-right: 12px">
@@ -88,6 +88,7 @@
 import CreateClass from "@/components/mainScreen/sideBar/createClass/CreateClass";
 import JoinClass from "@/components/mainScreen/sideBar/joinClass/JoinClass";
 import { mapGetters } from "vuex";
+import { AUTH_LOGOUT } from "../../../store/actions/auth";
 
 export default {
   name: "SideBar",
@@ -129,20 +130,32 @@ export default {
           title: "Log out",
           icon: "mdi-logout-variant",
           onClick: () => {
+            this.logout();
             this.$socket.close();
-            this.$router.push("/login");
+            this.$store.dispatch("RESET_STATE");
           },
         },
       ],
       selectedClass: 0,
     };
   },
+  methods: {
+    logout() {
+      this.$store.dispatch(AUTH_LOGOUT).then(() => {
+        this.$router.push({ path: "/login" });
+      });
+    },
+  },
   computed: {
     isDark() {
       return this.$vuetify.theme.dark;
     },
     ...mapGetters(["joinedClassrooms", "ownedClassrooms"]),
+    user() {
+      return this.$store.getters.user;
+    },
   },
+  watch: {},
 };
 </script>
 

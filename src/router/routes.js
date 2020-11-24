@@ -1,13 +1,24 @@
-import About from "./views/About.vue";
+import Home from "./views/Home.vue";
 import Login from "./views/LoginScreen.vue";
 import Classes from "./views/MainScreen.vue";
+import Register from "./views/Register.vue";
 import store from "../store";
 
 export default [
   {
     path: "/",
     name: "Home",
-    component: () => import("./views/Home.vue"),
+    beforeEnter(to, from, next) {
+      if (store.getters.isAuthenticated) {
+        return next({
+          path: "/classes",
+        });
+      } else {
+        return next({
+          path: "/login",
+        });
+      }
+    },
   },
   {
     path: "/login",
@@ -15,12 +26,18 @@ export default [
     component: Login,
   },
   {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
     path: "/about",
     name: "About",
-    component: About,
+    component: Home,
   },
   {
     path: "/classes",
+    name: "ClassStart",
     beforeEnter(to, from, next) {
       store
         .dispatch("FETCH_CLASSES")
@@ -28,14 +45,14 @@ export default [
           const firstClass = Object.values(store.state.Classroom.classrooms)[0];
           // console.log(firstClass);
           if (firstClass) {
-            next({
-              name: "Message",
+            return next({
+              name: "MessageStart",
               params: {
                 code: firstClass.code,
               },
             });
           } else {
-            next({ name: "About" });
+            return next({ name: "About" });
           }
         })
         .catch(() => {
@@ -48,7 +65,6 @@ export default [
   },
   {
     path: "/classes/:code",
-    name: "Classes",
     component: Classes,
     meta: {
       requiresAuth: true,
@@ -65,9 +81,9 @@ export default [
     },
     children: [
       {
-        path: "message",
+        path: "",
         name: "MessageStart",
-        alias: [""],
+        alias: "message",
         component: () => import("./views/MessageScreen.vue"),
       },
       {
