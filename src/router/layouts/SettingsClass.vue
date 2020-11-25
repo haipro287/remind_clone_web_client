@@ -91,7 +91,7 @@
 </template>
 <script>
 import IconPicker from "@/components/mainScreen/sideBar/createClass/IconPicker";
-import { removeClassroom } from "@/services/classroom.services.js";
+import { removeClassroom } from "@/services/classroom.service.js";
 
 export default {
   components: { IconPicker },
