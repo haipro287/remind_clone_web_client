@@ -8,6 +8,25 @@ export function getClassrooms() {
  * Get members of the classroom with the given id.
  * @param {Number} classroomId
  */
-export function getClassroomMembers(classroomId) {
+export function getClassroomStudents(classroomId) {
   return axios.get(`/api/classroom/${classroomId}/students`);
+}
+/**
+ *
+ * @param {Number} classroomId
+ */
+export function getClassroomMembers(classroomId) {
+  return axios.get(`/api/classroom/${classroomId}/members`);
+}
+
+export function getClassroomInfo(classroomId) {
+  return axios.get(`/api/classroom/${classroomId}`);
+}
+
+export function getClassroomOwners(classroomId) {
+  return axios.get(`/api/classroom/${classroomId}/owners`);
+}
+
+export function leaveClassroom(classroomId) {
+  return axios.post(`/api/classroom/${classroomId}/students/leave`);
 }

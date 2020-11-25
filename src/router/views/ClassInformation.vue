@@ -18,7 +18,7 @@
     </v-card>
     <v-card class="mt-3 pa-4" elevation="1">
       <v-card-title></v-card-title>
-      <v-btn style="margin-left: 15px" outlined color="error"> Leave class </v-btn>
+      <v-btn style="margin-left: 15px" outlined color="error" @click="leaveClassroom"> Leave class </v-btn>
       <v-subheader>You will no longer receive announcements from Web Development.</v-subheader>
       <v-card-actions></v-card-actions>
     </v-card>
@@ -48,32 +48,52 @@
 </template>
 
 <script>
+import { getClassroomInfo, leaveClassroom, getClassroomOwners } from "@/services/classroom.service.js";
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
       items: [
-        {
-          title: "Class Name",
-          value: "Class 1",
-        },
-        {
-          title: "Class Code",
-          value: "@454kgf4",
-        },
-        {
-          title: "School",
-          value: "Not affiliated with a school",
-        },
+        { title: "Code", value: "" },
+        { title: "Name", value: "" },
+        { title: "School", value: "" },
       ],
-      owners: [
-        {
-          name: "Lai Tuan Anh",
-          avatar: "",
-        },
-      ],
+      owners: [],
     };
   },
-  methods: {},
+  methods: {
+    getClassroomInfo() {
+      getClassroomInfo(this.currentClassroom.id).then(res => {
+        this.items[0].value = res.data.data.code;
+        this.items[1].value = res.data.data.name;
+        this.items[2].value = res.data.data.school;
+      });
+    },
+    leaveClassroom() {
+      leaveClassroom(this.currentClassroom.id).then(res => {
+        if (res.status === 201) {
+          this.$store.dispatch("RESET_CLASSROOM");
+          this.$store.dispatch("FETCH_CLASSES");
+          this.$router.push({ path: "/classes" });
+        }
+      });
+    },
+    getClassroomOwners() {
+      getClassroomOwners(this.currentClassroom.id).then(res => {
+        this.owners = res.data.data;
+      });
+    },
+  },
+  computed: {
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+    }),
+  },
+  mounted() {
+    this.getClassroomInfo();
+    this.getClassroomOwners();
+  },
 };
 </script>
 

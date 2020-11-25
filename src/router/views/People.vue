@@ -8,11 +8,15 @@
       <v-data-table
         v-model="selected"
         :headers="headers"
-        :items="desserts"
+        :items="members"
         :search="search"
         item-key="id"
         show-select
         calculate-widths
+        :loading="loading"
+        loading-text="Loading..."
+        :sort-by="['type']"
+        :sort-desc="[true]"
         @click:row="showPersonDetail()"
         class="row-pointer"
       >
@@ -24,6 +28,9 @@
 
 <script>
 import PersonDetail from "@/components/peopleScreen/PersonDetail";
+import { getClassroomMembers } from "@/services/classroom.service.js";
+import { mapState } from "vuex";
+
 export default {
   components: { PersonDetail },
   data() {
@@ -34,74 +41,34 @@ export default {
       selected: [],
       headers: [
         { text: "Name", value: "name" },
+        { text: "Email", value: "email" },
         { text: "Date joined", value: "joined_time" },
-        { text: "Role", value: "role" },
-        { text: "Family members", value: "family_member_name" },
+        { text: "Role", value: "Role" },
+        { text: "Type", value: "type" },
       ],
-      desserts: [
-        {
-          id: 1,
-          name: "Pham Thi Dan 1",
-          joined_time: "Sep 30, 2020",
-          role: "Teacher",
-          family_member_name: "",
-        },
-        {
-          id: 2,
-          name: "Pham Thi Dan 2",
-          joined_time: "Sep 29, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-        {
-          id: 3,
-          name: "Pham Thi Dan 3",
-          joined_time: "Sep 20, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-        {
-          id: 4,
-          name: "Pham Thi Dan 4",
-          joined_time: "Sep 28, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-        {
-          id: 5,
-          name: "Pham Thi Dan 5",
-          joined_time: "Sep 27, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-        {
-          id: 6,
-          name: "Pham Thi Dan 6",
-          joined_time: "Sep 26, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-        {
-          id: 7,
-          name: "Pham Thi Dan 7",
-          joined_time: "Sep 25, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-        {
-          id: 8,
-          name: "Pham Thi Dan 8",
-          joined_time: "Sep 22, 2020",
-          role: "Student",
-          family_member_name: "",
-        },
-      ],
+      members: [],
+      loading: false,
     };
   },
   methods: {
     showPersonDetail() {
       this.personDetail = true;
     },
+    getAllMembers() {
+      this.loading = true;
+      getClassroomMembers(this.currentClassroom.id).then(res => {
+        this.loading = false;
+        this.members = res.data.data;
+      });
+    },
+  },
+  computed: {
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+    }),
+  },
+  mounted() {
+    this.getAllMembers();
   },
 };
 </script>

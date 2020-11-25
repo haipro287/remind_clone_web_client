@@ -79,6 +79,8 @@ export default {
         if (res.status === 201 && res.data.data.code != null) {
           console.log(res.data.data);
           this.dialog = false;
+          this.$store.dispatch("RESET_CLASSROOM");
+          this.$store.dispatch("FETCH_CLASSES");
         }
       });
     },

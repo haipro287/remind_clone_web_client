@@ -91,6 +91,8 @@
 </template>
 <script>
 import IconPicker from "@/components/mainScreen/sideBar/createClass/IconPicker";
+import { removeClassroom } from "@/services/classroom.services.js";
+
 export default {
   components: { IconPicker },
   name: "SettingsClass",
@@ -118,7 +120,7 @@ export default {
       console.log("reuse class code");
     },
     removeClass() {
-      console.log("remove class");
+      removeClassroom();
     },
     openAvatarPicker() {
       this.showAvatarPicker = true;

@@ -20,7 +20,12 @@
           <v-container>
             <v-row>
               <v-col>
-                <v-text-field prefix="@" label="Class code" v-model="classroom.code"></v-text-field>
+                <v-text-field
+                  prefix="@"
+                  label="Class code"
+                  v-model="classroom.code"
+                  @keyup.enter.exact="joinClassroom"
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -51,9 +56,12 @@ export default {
       axios
         .post(`/api/classroom/join/${this.classroom.code}`)
         .then(res => {
-          if (res.status === 201 && res.data.data.code != null) {
+          if (res.status === 201) {
             console.log(res.data.data);
+            this.classroom.code = null;
             this.dialog = false;
+            this.$store.dispatch("RESET_CLASSROOM");
+            this.$store.dispatch("FETCH_CLASSES");
           }
         })
         .catch(err => {
