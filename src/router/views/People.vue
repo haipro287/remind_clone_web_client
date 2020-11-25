@@ -42,7 +42,7 @@ export default {
       headers: [
         { text: "Name", value: "name" },
         { text: "Email", value: "email" },
-        { text: "Date joined", value: "joined_time" },
+        { text: "Date joined", value: "joined_date" },
         { text: "Role", value: "Role" },
         { text: "Type", value: "type" },
       ],

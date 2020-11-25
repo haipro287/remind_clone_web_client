@@ -30,3 +30,7 @@ export function getClassroomOwners(classroomId) {
 export function leaveClassroom(classroomId) {
   return axios.post(`/api/classroom/${classroomId}/students/leave`);
 }
+
+export function deleteClassroom(classroomId) {
+  return axios.delete(`/api/classroom/${classroomId}`);
+}

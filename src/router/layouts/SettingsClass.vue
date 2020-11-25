@@ -91,7 +91,8 @@
 </template>
 <script>
 import IconPicker from "@/components/mainScreen/sideBar/createClass/IconPicker";
-import { removeClassroom } from "@/services/classroom.service.js";
+import { deleteClassroom } from "@/services/classroom.service.js";
+import { mapState } from "vuex";
 
 export default {
   components: { IconPicker },
@@ -120,7 +121,13 @@ export default {
       console.log("reuse class code");
     },
     removeClass() {
-      removeClassroom();
+      deleteClassroom(this.currentClassroom.id).then(res => {
+        if (res.status === 201) {
+          this.$store.dispatch("RESET_CLASSROOM");
+          this.$store.dispatch("FETCH_CLASSES");
+          this.$router.push({ path: "/classes" });
+        }
+      });
     },
     openAvatarPicker() {
       this.showAvatarPicker = true;
@@ -128,6 +135,11 @@ export default {
     selectAvatar(avatar) {
       this.avatar = avatar;
     },
+  },
+  computed: {
+    ...mapState({
+      currentClassroom: state => state.Classroom.currentClassroom,
+    }),
   },
 };
 </script>
